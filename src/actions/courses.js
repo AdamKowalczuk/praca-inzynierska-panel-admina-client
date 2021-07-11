@@ -1,12 +1,17 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from "../constants/actionTypes";
+import {
+  FETCH_ALL_COURSES,
+  CREATE,
+  UPDATE,
+  DELETE,
+} from "../constants/actionTypes";
 
 import * as api from "../api/index.js";
 
 export const getCourses = () => async (dispatch) => {
   try {
     const { data } = await api.fetchCourses();
-
-    dispatch({ type: FETCH_ALL, payload: data });
+    console.log("Get Courses", data);
+    dispatch({ type: FETCH_ALL_COURSES, payload: data });
   } catch (error) {
     console.log(error.message);
   }

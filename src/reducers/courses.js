@@ -1,8 +1,13 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from "../constants/actionTypes.js";
+import {
+  FETCH_ALL_COURSES,
+  CREATE,
+  UPDATE,
+  DELETE,
+} from "../constants/actionTypes.js";
 
 export default (courses = [], action) => {
   switch (action.type) {
-    case FETCH_ALL:
+    case FETCH_ALL_COURSES:
       return action.payload;
 
     case CREATE:
