@@ -1,0 +1,29 @@
+$dark: #343a40;
+$gray-light: #c2c7d0;
+$gray-medium: #4c4c4c;
+$gray: #494e53;
+$white: #f1f1f2;
+
+.topbar {
+  // position: absolute;
+  // left: 250px;
+  // top: 0;
+  width: calc(100% - 250px);
+  margin-left: 250px;
+  // margin-left: 10%;
+  height: 50px;
+  background-color: white;
+  border-bottom: 1px solid $gray-light;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  color: rgba(0, 0, 0, 0.5);
+
+  svg {
+    cursor: pointer;
+    padding: 0px 20px;
+  }
+  svg:hover {
+    color: $gray;
+  }
+}
