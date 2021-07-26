@@ -18,11 +18,12 @@ $white: #f1f1f2;
 .btn_white {
   background-color: #f1f1f2;
   color: #0c0c0d;
-  border: 3px solid #0c0c0d;
+  border: 3px solid #f1f1f2;
   width: 80%;
   margin: 10px 10%;
   font-weight: 500;
   line-height: 1.75;
+  height: 56px;
 }
 .btn_dark {
   background-color: #0c0c0d;
@@ -31,6 +32,7 @@ $white: #f1f1f2;
   width: 80%;
   margin: 10px 10%;
 }
+
 .btn_right {
   position: absolute;
   bottom: 5%;
@@ -56,6 +58,9 @@ $white: #f1f1f2;
   color: $white;
   border-color: $white;
 }
+.modal-button {
+  padding: 10px;
+}
 
 .MuiButton-contained {
   background-color: $dark !important;
@@ -72,4 +77,27 @@ $white: #f1f1f2;
 }
 .MuiIconButton-root {
   color: $white !important;
+}
+
+@media only screen and (min-width: 800px) {
+  .btn_white {
+    border: 3px solid #f1f1f2;
+    width: 80%;
+    margin: 10px 10%;
+  }
+  .btn_dark {
+    width: 40%;
+    margin: 10px 10%;
+  }
+  .btn_right {
+    width: 20%;
+  }
+  .btn_right2 {
+    width: 35%;
+  }
+
+  .MuiButton-contained {
+    width: 40% !important;
+    margin: 10px 10% !important;
+  }
 }

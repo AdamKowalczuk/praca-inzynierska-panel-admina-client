@@ -1,8 +1,13 @@
-export const CREATE = "CREATE";
-export const UPDATE = "UPDATE";
-export const DELETE = "DELETE";
+export const CREATE_COURSE = "CREATE_COURSE";
+export const UPDATE_COURSE = "UPDATE_COURSE";
+export const DELETE_COURSE = "DELETE_COURSE";
+export const DELETE_USER = "DELETE_USER";
 export const FETCH_ALL_COURSES = "FETCH_ALL_COURSES";
 export const FETCH_ALL_USERS = "FETCH_ALL_USERS";
+
+export const SET_COURSE_NAME = "SET_COURSE_NAME";
+export const CHANGE_COURSE_NAME = "CHANGE_COURSE_NAME";
+export const CHANGE_COURSE_DESCRIPTION = "CHANGE_COURSE_DESCRIPTION";
 
 export const AUTH = "AUTH";
 export const LOGOUT = "LOGOUT";

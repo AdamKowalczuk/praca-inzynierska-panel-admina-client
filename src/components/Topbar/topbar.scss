@@ -1,8 +1,7 @@
-$dark: #343a40;
-$gray-light: #c2c7d0;
-$gray-medium: #4c4c4c;
-$gray: #494e53;
-$white: #f1f1f2;
+$dark: #2f3749;
+$gray: #363f50;
+$white: #ffffff;
+$green: #22ca96;
 
 .topbar {
   // position: absolute;
@@ -11,19 +10,23 @@ $white: #f1f1f2;
   width: calc(100% - 250px);
   margin-left: 250px;
   // margin-left: 10%;
-  height: 50px;
-  background-color: white;
-  border-bottom: 1px solid $gray-light;
+  height: 100px;
+  background-color: $dark;
   display: flex;
   align-items: center;
-  flex-direction: row-reverse;
-  color: rgba(0, 0, 0, 0.5);
-
+  color: $white;
+  h1 {
+    margin-left: 5%;
+    width: 90%;
+    text-align: center;
+  }
   svg {
     cursor: pointer;
     padding: 0px 20px;
+    height: 40px;
+    width: 40px;
   }
   svg:hover {
-    color: $gray;
+    color: $green;
   }
 }

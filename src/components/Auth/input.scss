@@ -48,3 +48,6 @@ $white: #f1f1f2;
 .MuiInputBase-input {
   color: $white !important;
 }
+.MuiIconButton-label {
+  justify-content: flex-end !important;
+}

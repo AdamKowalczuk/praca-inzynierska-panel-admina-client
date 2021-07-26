@@ -1,7 +1,7 @@
 // import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import "./App.scss";
-import AddCourseForm from "./components/AddCourseForm/AddCourseForm";
+// import AddCourseForm from "./components/AddCourseForm/AddCourseForm";
 import Courses from "./components/Courses/Courses.js";
 import Users from "./components/Users/Users.js";
 
@@ -18,7 +18,10 @@ import Auth from "./components/Auth/Auth";
 const App = () => {
   // const [count, setCount] = useState(0);
   // const cos = 0;
-  const [currentId, , setCurrentId] = useState(0);
+  const [
+    currentId,
+    // ,  setCurrentId
+  ] = useState(0);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,7 +34,7 @@ const App = () => {
         <Route path="/" exact component={Auth} />
         <Route path="/admin" exact component={Home} />
         <Route path="/admin/kursy" exact component={Courses} />
-        <Route path="/admin/uzytkownicy" exact component={Users} />
+        <Route path="/admin/użytkownicy" exact component={Users} />
       </Switch>
     </BrowserRouter>
   );

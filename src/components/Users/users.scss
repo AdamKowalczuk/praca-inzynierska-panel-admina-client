@@ -1,0 +1,55 @@
+// $dark: #0c0c0d;
+$dark: #2f3749;
+$gray: #363f50;
+$white: #ffffff;
+$green: #22ca96;
+$red: #ff4e40;
+
+table,
+th,
+td {
+  border-bottom: 1px solid $white;
+  border-collapse: collapse;
+}
+
+.table-dark {
+  background-color: $gray;
+  color: $white;
+
+  border-spacing: 20px;
+  text-align: center;
+  width: 80%;
+  margin: 0% 10%;
+  border-radius: 10px;
+  overflow: hidden;
+
+  thead {
+    font-weight: bold;
+
+    // border: 5px solid white;
+
+    tr {
+      th {
+        padding: 15px;
+        // color: $white;
+        color: $green;
+      }
+    }
+  }
+  svg {
+    font-size: 30px;
+    background-color: $red;
+    padding: 2px;
+    border-radius: 5px;
+  }
+  svg:hover {
+    color: $red;
+    background-color: $white;
+    cursor: pointer;
+  }
+  tr {
+    th {
+      padding: 15px;
+    }
+  }
+}

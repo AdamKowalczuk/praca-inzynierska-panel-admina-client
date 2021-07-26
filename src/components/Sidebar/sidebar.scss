@@ -1,9 +1,8 @@
 // $dark: #0c0c0d;
-$dark: #343a40;
-$gray-light: #c2c7d0;
-$gray-medium: #4c4c4c;
-$gray: #494e53;
-$white: #f1f1f2;
+$dark: #2f3749;
+$gray: #363f50;
+$white: #ffffff;
+$green: #22ca96;
 
 .sidebar {
   position: absolute;
@@ -12,42 +11,50 @@ $white: #f1f1f2;
   width: 250px;
   height: 100vh;
   background-color: $dark;
-  color: $gray-light;
+  color: $white;
   .logo {
-    height: 50px;
-    text-align: center;
-    // border-right: 1px solid $gray-light;
-    border-bottom: 1px solid $gray-light;
+    img {
+      height: 30px;
+      width: 30px;
+    }
+    p {
+      margin-left: 5px;
+    }
+    color: $green;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .subject {
-    padding: 10px 0;
-    .nav-header {
-      padding: 5px;
-      text-align: center;
-    }
+    padding: 10px 20px;
     .nav-item {
       display: flex;
       // justify-content: center;
       // text-align: center;
       padding: 10px;
+      img {
+        width: 40px;
+        height: 40px;
+      }
       p {
-        padding: 0 8px;
+        padding: 0 15px;
       }
     }
     .nav-item:hover {
-      background-color: $gray;
-      border-radius: 5px;
+      background-color: $green;
+      border-radius: 10px;
       cursor: pointer;
       color: $white;
     }
-    svg {
-      font-size: 22px;
-      margin-left: 10px;
+    img {
+      color: $white;
+      fill: white;
     }
   }
 }
 
 .link {
   text-decoration: none;
-  color: $gray-light;
+  color: $white;
 }

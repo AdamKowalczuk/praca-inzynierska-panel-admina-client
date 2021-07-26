@@ -4,50 +4,44 @@ import AddBoxIcon from "@material-ui/icons/AddBox";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import PersonAddDisabledIcon from "@material-ui/icons/PersonAddDisabled";
+import LanguageIcon from "@material-ui/icons/Language";
+import Home from "../../images/home.svg";
+import OpenBook from "../../images/open-book.svg";
+import Group from "../../images/group.svg";
+import Web from "../../images/web.svg";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
     <>
       <div className="sidebar">
-        <h1 className="logo">FrontWeb</h1>
+        <h3 className="logo">
+          <img src={Web} alt="web" />
+          <p className="futura">WebFront</p>
+        </h3>
         <div className="subject">
-          <h4 className="nav-header">Courses</h4>
-          <Link className="link" to="/admin/kursy">
+          <Link className="link" to="/admin/">
             <h4 className="nav-item">
-              <AssignmentIcon />
-              <p>All courses</p>
+              <img src={Home} alt="home" />
+              <p className="center">Strona główna</p>
             </h4>
           </Link>
-
-          <h4 className="nav-item">
-            <AddBoxIcon />
-            <p>Add course</p>
-          </h4>
-          <h4 className="nav-item">
-            <DeleteIcon />
-            <p>Delete course</p>
-          </h4>
         </div>
         <div className="subject">
-          <h4 className="nav-header">Users</h4>
-          <Link className="link" to="/admin/uzytkownicy">
+          <Link className="link" to="/admin/kursy">
             <h4 className="nav-item">
-              <AccountBoxIcon />
-              <p>All users</p>
+              <img src={OpenBook} alt="open book" />
+              <p className="center">Kursy</p>
             </h4>
           </Link>
-
-          <h4 className="nav-item">
-            <PersonAddIcon />
-            <p> Add user</p>
-          </h4>
-          <h4 className="nav-item">
-            <PersonAddDisabledIcon />
-            <p>Delete user</p>
-          </h4>
+        </div>
+        <div className="subject">
+          <Link className="link" to="/admin/użytkownicy">
+            <h4 className="nav-item">
+              <img src={Group} alt="group" />
+              <p className="center">Użytkownicy</p>
+            </h4>
+          </Link>
         </div>
       </div>
     </>

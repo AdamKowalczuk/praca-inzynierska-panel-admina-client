@@ -1,16 +1,47 @@
 @import url("https://fonts.googleapis.com/css2?family=Krona+One&family=Roboto:ital,wght@0,300;0,400;0,500;1,400;1,500;1,700&display=swap");
 $dark: #0c0c0d;
+
+// $dark: #343a40;
+$dark: #2f3749;
+$gray: #363f50;
+$white: #ffffff;
+$green: #22ca96;
+
 // #222222
 $white: #f1f1f2;
-* {
-  font-family: "Roboto", sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&family=Roboto:ital,wght@0,300;0,400;0,500;1,400;1,500;1,700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&display=swap");
+
+@font-face {
+  font-family: Futura;
+  src: url("./futura/futura\ medium\ bt.ttf");
 }
+// @font-face {
+//   font-family: Helvetica2;
+//   src: url("./helvetica/Helvetica.ttf");
+// }
+
 body {
   box-sizing: border-box;
   font-size: 18px;
   background-color: $dark;
   margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+  // font-family: "EB Garamond", serif;
+
+  // font-family: Futura;
+  // font-family: Helvetica2 !important;
+  // font-family: Arial, Helvetica, sans-serif;
+  // font-weight: 700;
+  // font-weight: bold;
+  // font-size: 20px;
+  // font-family: "Bodoni Moda", serif !important;
 }
+.futura {
+  font-family: Futura;
+}
+
 .center {
   display: flex;
   justify-content: center;
