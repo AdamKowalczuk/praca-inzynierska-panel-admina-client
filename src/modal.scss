@@ -1,0 +1,76 @@
+$dark: #2f3749;
+$gray: #363f50;
+$white: #ffffff;
+$green: #22ca96;
+$red: #ff4e40;
+
+.modal {
+  width: 35%;
+  margin: 120px 32.5%;
+  border-radius: 10px;
+  // padding: 20px;
+  background-color: $white;
+  position: relative;
+  color: $gray;
+  outline: none;
+  form {
+    margin-top: 40px;
+    padding: 0 20px 20px 20px;
+  }
+  .modal-top {
+    background-color: $green;
+    height: 65px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    .close-icon {
+      position: absolute;
+      height: 25px;
+      width: 25px;
+      right: 10px;
+      top: 15px;
+      padding: 5px;
+      background-color: $white;
+      color: $green;
+      border-radius: 10px;
+    }
+    .close-icon:hover {
+      cursor: pointer;
+    }
+  }
+  .add-photo-container {
+    position: relative;
+    margin-bottom: 30px;
+    .add-photo {
+      background-color: $green;
+      width: 40px;
+      padding: 10px;
+      border-radius: 10px;
+      z-index: 1;
+    }
+    .add-photo-text {
+      padding: 5px;
+      padding-left: 20px;
+      height: 25px;
+      background-color: $green;
+      color: $white;
+      display: flex;
+
+      position: absolute;
+      left: 50px;
+      top: 12.5px;
+
+      // left: 40px;
+    }
+  }
+
+  input,
+  textarea {
+    padding: 10px;
+    width: calc(100% - 20px);
+    margin-bottom: 20px;
+  }
+
+  textarea {
+    min-height: 100px;
+  }
+}
