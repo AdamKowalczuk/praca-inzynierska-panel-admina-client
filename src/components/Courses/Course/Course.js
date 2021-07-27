@@ -6,6 +6,7 @@ import "./course.scss";
 // import AccordionDetails from "@material-ui/core/AccordionDetails";
 // import Typography from "@material-ui/core/Typography";
 // import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Link } from "react-router-dom";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import AssessmentIcon from "@material-ui/icons/Assessment";
 import EditIcon from "@material-ui/icons/Edit";
@@ -18,6 +19,7 @@ import Lesson from "../../../images/board.svg";
 import {
   changeCourseName,
   changeCourseDescription,
+  changeActualCourse,
   // setCourseName,
 } from "../../../actions/courses";
 import { useDispatch, useSelector } from "react-redux";
@@ -142,17 +144,20 @@ const Course = ({ course, id, setCurrentId }) => {
             </form>
           </div>
         </Modal>
-        <h2 className="futura">{courseName}</h2>
+        <h2 className="futura ">{courseName}</h2>
         <h3>{courseDescription}</h3>
         <div className="chapters-lessons-container">
+          <Link className="link" to="/admin/rozdziały">
+            <h4
+              style={{ cursor: "pointer" }}
+              onClick={() => dispatch(changeActualCourse(id))}
+            >
+              <img src={OpenBook} alt="lesson" />
+              <p>{chapters.length}</p>
+              <p className="italic">rozdziały</p>
+            </h4>
+          </Link>
           <h4>
-            {/* <AssessmentIcon /> */}
-            <img src={OpenBook} alt="lesson" />
-            <p>{chapters.length}</p>
-            <p className="italic">rozdziały</p>
-          </h4>
-          <h4>
-            {/* <AssignmentIcon /> */}
             <img src={Lesson} alt="lesson" />
             <p>{sumLessons()}</p>
             <p className="italic ">lekcje</p>

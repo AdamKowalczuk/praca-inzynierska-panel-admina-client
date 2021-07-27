@@ -39,7 +39,7 @@ const Topbar = (props) => {
     <>
       {user?.result ? (
         <div className="topbar">
-          <h1>{props.name}</h1>
+          <h1 className="circular">{props.name}</h1>
           <MeetingRoomIcon onClick={logout} />
           {/* <Button variant="contained" className="btn" >
             Logout

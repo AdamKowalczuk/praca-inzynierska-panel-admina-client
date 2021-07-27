@@ -8,26 +8,22 @@ import Users from "./components/Users/Users.js";
 import { getCourses } from "./actions/courses";
 import { getUsers } from "./actions/users";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
+import Chapters from "./components/Chapters/Chapters";
+import Lessons from "./components/Lessons/Lessons";
 
 const App = () => {
-  // const [count, setCount] = useState(0);
-  // const cos = 0;
-  const [
-    currentId,
-    // ,  setCurrentId
-  ] = useState(0);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCourses());
     dispatch(getUsers());
-  }, [currentId, dispatch]);
+  }, [dispatch]);
   return (
     <BrowserRouter>
       <Switch>
@@ -35,11 +31,11 @@ const App = () => {
         <Route path="/admin" exact component={Home} />
         <Route path="/admin/kursy" exact component={Courses} />
         <Route path="/admin/użytkownicy" exact component={Users} />
+        <Route path="/admin/rozdziały" exact component={Chapters} />
+        <Route path="/admin/lekcje" exact component={Lessons} />
       </Switch>
     </BrowserRouter>
   );
-
-  // {/* <AddCourseForm /> */}
 };
 
 export default App;

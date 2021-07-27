@@ -69,3 +69,16 @@ export const deleteCourse = (id) => async (dispatch) => {
     console.log(error.message);
   }
 };
+
+export const changeActualCourse = (actualCourse) => {
+  return {
+    type: "CHANGE_ACTUAL_COURSE",
+    payload: actualCourse,
+  };
+};
+export const changeActualChapter = (actualChapter) => {
+  return {
+    type: "CHANGE_ACTUAL_CHAPTER",
+    payload: actualChapter,
+  };
+};

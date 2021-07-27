@@ -17,6 +17,10 @@ $white: #f1f1f2;
   font-family: Futura;
   src: url("./futura/futura\ medium\ bt.ttf");
 }
+@font-face {
+  font-family: Circular;
+  src: url("./Circular\ Std\ Font.otf");
+}
 // @font-face {
 //   font-family: Helvetica2;
 //   src: url("./helvetica/Helvetica.ttf");
@@ -24,10 +28,12 @@ $white: #f1f1f2;
 
 body {
   box-sizing: border-box;
-  font-size: 18px;
+  font-size: 20px;
   background-color: $dark;
   margin: 0 auto;
   font-family: "Roboto", sans-serif;
+
+  // font-size: 22px;
   // font-family: "EB Garamond", serif;
 
   // font-family: Futura;
@@ -40,6 +46,12 @@ body {
 }
 .futura {
   font-family: Futura;
+  // font-family: Circular;
+  // font-family: Circular;
+  // font-size: 22px;
+}
+.circular {
+  font-family: Circular;
 }
 
 .center {
