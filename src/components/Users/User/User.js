@@ -10,10 +10,6 @@ const User = ({ user, index, setCurrentId }) => {
 
   return (
     <>
-      {/* <div style={{ color: "red", padding: "20px" }}>
-        <h3>{user.email}</h3>
-        <p>{user.password}</p>
-      </div> */}
       <th className="table-index">
         <h3>{index}</h3>
       </th>
@@ -23,7 +19,6 @@ const User = ({ user, index, setCurrentId }) => {
       <th>
         <h3>{user.email}</h3>
       </th>
-      {/* <th>{user.password}</th> */}
       <th>
         <DeleteIcon onClick={() => dispatch(deleteUser(user._id))} />
       </th>

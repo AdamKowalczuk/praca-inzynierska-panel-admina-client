@@ -1,17 +1,11 @@
-// import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import "./App.scss";
-// import AddCourseForm from "./components/AddCourseForm/AddCourseForm";
 import Courses from "./components/Courses/Courses.js";
 import Users from "./components/Users/Users.js";
-
 import { getCourses } from "./actions/courses";
 import { getUsers } from "./actions/users";
-
 import React, { useEffect } from "react";
-
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
 import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
 import Chapters from "./components/Chapters/Chapters";

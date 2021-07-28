@@ -4,13 +4,12 @@ import Sidebar from "../Sidebar/Sidebar";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Partying from "../../images/partying.svg";
 import DoneChecking from "../../images/done-checking.svg";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import moment from "moment";
 import DateDiff from "date-diff";
 
 import "./home.scss";
 const Home = () => {
-  const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
 
   let startDateYear = moment().format("YYYY");
@@ -55,17 +54,9 @@ const Home = () => {
         });
       });
     });
-
-    console.log("coursesAcomplished", coursesAcomplished);
-    console.log("chaptersAcomplished", chaptersAcomplished);
-    console.log("lessonsAcomplished", lessonsAcomplished);
     return [coursesAcomplished, chaptersAcomplished, lessonsAcomplished];
-    // coursesAcomplished: coursesAcomplished,
-    // chaptersAcomplished: chaptersAcomplished,
-    // lessonsAcomplished: lessonsAcomplished,
   }
   const acomplished = getAcomplishedCoursesNumber();
-  console.log(acomplished);
   return (
     <>
       <Topbar name="Strona główna" />

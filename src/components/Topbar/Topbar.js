@@ -1,11 +1,8 @@
 import "./topbar.scss";
-
 import React, { useState, useEffect } from "react";
-// import { Button } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
-// import ButtonRight from "../Button/ButtonRight";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 
 import * as actionType from "../../constants/actionTypes";
@@ -41,9 +38,6 @@ const Topbar = (props) => {
         <div className="topbar">
           <h1 className="circular">{props.name}</h1>
           <MeetingRoomIcon onClick={logout} />
-          {/* <Button variant="contained" className="btn" >
-            Logout
-          </Button> */}
         </div>
       ) : null}
     </>

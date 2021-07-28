@@ -1,40 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import "./chapter.scss";
 import { Link } from "react-router-dom";
-import AssignmentIcon from "@material-ui/icons/Assignment";
-import AssessmentIcon from "@material-ui/icons/Assessment";
-import EditIcon from "@material-ui/icons/Edit";
 import Modal from "@material-ui/core/Modal";
 import Button from "../../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
 import Pen from "../../../images/pen.svg";
-import OpenBook from "../../../images/open-book.svg";
 import Lesson from "../../../images/board.svg";
 import {
-  changeCourseName,
-  changeCourseDescription,
-  changeActualCourse,
   changeActualChapter,
+  updateChapter,
   // setCourseName,
 } from "../../../actions/courses";
 import "../../../modal.scss";
 import { useDispatch, useSelector } from "react-redux";
 const Chapter = ({ chapter, id }) => {
   const dispatch = useDispatch();
-
+  const initialState = {
+    name: chapter.name,
+    description: chapter.description,
+    isFinished: chapter.isFinished,
+    lessons: chapter.lessons,
+  };
   const [open, setOpen] = React.useState(false);
-
+  const [form, setForm] = useState(initialState);
   const handleOpen = () => {
-    // console.log(courseName);
     setOpen(true);
   };
-
-  const handleClose = (id) => {
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleClose = () => {
     setOpen(false);
   };
 
-  const handleSubmit = async (e, id) => {
-    // e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateChapter(form, chapter._id));
+    handleClose();
   };
 
   return (
@@ -54,25 +55,27 @@ const Chapter = ({ chapter, id }) => {
         >
           <div className="modal">
             <div className="modal-top">
-              <CloseIcon
-                className="close-icon"
-                onClick={() => handleClose(id)}
-              />
+              <CloseIcon className="close-icon" onClick={() => handleClose()} />
             </div>
 
-            <form action="post">
+            <form action="patch" onSubmit={handleSubmit}>
               <label htmlFor="name">
                 <h3>Nazwa rozdziału</h3>
               </label>
-              <input type="text" value={chapter.name} name="courseName" />
+              <input
+                type="text"
+                value={form.name}
+                onChange={handleChange}
+                name="name"
+              />
 
               <label htmlFor="description">
                 <h3>Opis rozdziału</h3>
               </label>
               <textarea
                 type="text"
-                value={chapter.description}
-                id="description"
+                value={form.description}
+                onChange={handleChange}
                 name="description"
               />
               <div className="modal-button-container">

@@ -1,10 +1,5 @@
 import React from "react";
 import "./sidebar.scss";
-import AddBoxIcon from "@material-ui/icons/AddBox";
-import AssignmentIcon from "@material-ui/icons/Assignment";
-import DeleteIcon from "@material-ui/icons/Delete";
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import LanguageIcon from "@material-ui/icons/Language";
 import Home from "../../images/home.svg";
 import OpenBook from "../../images/open-book.svg";
 import Group from "../../images/group.svg";

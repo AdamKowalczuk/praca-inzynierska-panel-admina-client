@@ -7,7 +7,6 @@ import "./users.scss";
 
 const Users = ({ setCurrentId }) => {
   const users = useSelector((state) => state.users);
-  console.log("Users:", users);
 
   return (
     <>

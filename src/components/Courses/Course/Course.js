@@ -1,15 +1,6 @@
-import React, { useEffect, useState } from "react";
-// import { useDispatch } from "react-redux";
+import React, { useState } from "react";
 import "./course.scss";
-// import Accordion from "@material-ui/core/Accordion";
-// import AccordionSummary from "@material-ui/core/AccordionSummary";
-// import AccordionDetails from "@material-ui/core/AccordionDetails";
-// import Typography from "@material-ui/core/Typography";
-// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Link } from "react-router-dom";
-import AssignmentIcon from "@material-ui/icons/Assignment";
-import AssessmentIcon from "@material-ui/icons/Assessment";
-import EditIcon from "@material-ui/icons/Edit";
 import Modal from "@material-ui/core/Modal";
 import Button from "../../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
@@ -17,22 +8,25 @@ import Pen from "../../../images/pen.svg";
 import OpenBook from "../../../images/open-book.svg";
 import Lesson from "../../../images/board.svg";
 import {
-  changeCourseName,
-  changeCourseDescription,
   changeActualCourse,
+  updateCourse,
   // setCourseName,
 } from "../../../actions/courses";
 import "../../../modal.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Course = ({ course, id }) => {
-  let [courseName, courseDescription] = useState(false);
+  // let [courseName, courseDescription] = useState(false);
   const dispatch = useDispatch();
-  const courses = useSelector((state) => state.courses);
 
-  courseName = courses[id].name;
-  courseDescription = courses[id].description;
-
+  // const courses = useSelector((state) => state.courses);
+  const initialState = {
+    name: course.name,
+    description: course.description,
+    isFinished: course.isFinished,
+    chapters: course.chapters,
+  };
+  const [form, setForm] = useState(initialState);
   const chapters = course.chapters;
   function sumLessons() {
     let sum = 0;
@@ -43,21 +37,20 @@ const Course = ({ course, id }) => {
   }
 
   const [open, setOpen] = React.useState(false);
-
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
   const handleOpen = () => {
-    // console.log(courseName);
-    dispatch(changeCourseName(courseName));
-    dispatch(changeCourseDescription(courseDescription));
-    console.log("Open");
     setOpen(true);
   };
 
-  const handleClose = (course, id) => {
+  const handleClose = () => {
     setOpen(false);
   };
 
-  const handleSubmit = async (e, id) => {
-    // e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateCourse(form, course._id));
+    handleClose();
   };
 
   return (
@@ -78,26 +71,28 @@ const Course = ({ course, id }) => {
         >
           <div className="modal">
             <div className="modal-top">
-              <CloseIcon
-                className="close-icon"
-                onClick={() => handleClose(courseName, id)}
-              />
+              <CloseIcon className="close-icon" onClick={() => handleClose()} />
             </div>
 
-            <form action="post">
+            <form action="patch" onSubmit={handleSubmit}>
               <label htmlFor="name">
                 <h3>Nazwa kursu</h3>
               </label>
-              <input type="text" value={courseName} name="courseName" />
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+              />
 
               <label htmlFor="description">
                 <h3>Opis kursu</h3>
               </label>
               <textarea
                 type="text"
-                value={courseDescription}
-                id="description"
                 name="description"
+                value={form.description}
+                onChange={handleChange}
               />
               <div className="modal-button-container">
                 <Button
@@ -109,8 +104,8 @@ const Course = ({ course, id }) => {
             </form>
           </div>
         </Modal>
-        <h2 className="futura ">{courseName}</h2>
-        <h3>{courseDescription}</h3>
+        <h2 className="futura ">{course.name}</h2>
+        <h3>{course.description}</h3>
         <div className="chapters-lessons-container">
           <Link className="link" to="/admin/rozdziały">
             <h4
