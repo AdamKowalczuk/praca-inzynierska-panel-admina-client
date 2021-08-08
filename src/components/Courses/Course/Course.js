@@ -10,15 +10,17 @@ import Lesson from "../../../images/board.svg";
 import {
   changeActualCourse,
   updateCourse,
+  deleteCourse,
   // setCourseName,
 } from "../../../actions/courses";
 import "../../../modal.scss";
 import { useDispatch } from "react-redux";
+import Delete from "../../../images/delete.svg";
 
 const Course = ({ course, id }) => {
   // let [courseName, courseDescription] = useState(false);
   const dispatch = useDispatch();
-
+  // console.log(course);
   // const courses = useSelector((state) => state.courses);
   const initialState = {
     name: course.name,
@@ -61,6 +63,12 @@ const Course = ({ course, id }) => {
           alt="pen"
           className="edit-icon"
           onClick={() => handleOpen()}
+        />
+        <img
+          src={Delete}
+          alt="delete"
+          className="modal-delete-icon"
+          onClick={() => dispatch(deleteCourse(course._id))}
         />
 
         <Modal

@@ -10,32 +10,48 @@ import Modal from "@material-ui/core/Modal";
 import CloseIcon from "@material-ui/icons/Close";
 // import { createChapter } from "../../actions/courses";
 import {
-  changeCourseName,
-  changeCourseDescription,
-  changeActualCourse,
+  // changeCourseName,
+  // changeCourseDescription,
+  // changeActualCourse,
+  changeActualChapter,
   createChapter,
   // setCourseName,
 } from "../../actions/courses";
 
-const initialState = {
-  name: "",
-  description: "",
-  isFinished: "false",
-  lessons: [],
-};
-
 const Chapters = () => {
   const dispatch = useDispatch();
-  const [form, setForm] = useState(initialState);
+
   const courses = useSelector((state) => state.courses);
   const actualCourse = useSelector((state) => state.actualCourse);
   const id = courses[actualCourse]._id;
+  // console.log(courses);
+  // console.log(id);
+  function GenerateObjectId() {
+    var ObjectId = (
+      m = Math,
+      d = Date,
+      h = 16,
+      s = (s) => m.floor(s).toString(h)
+    ) =>
+      s(d.now() / 1000) + " ".repeat(h).replace(/./g, () => s(m.random() * h));
 
+    return ObjectId();
+  }
+
+  const initialState = {
+    name: "",
+    description: "",
+    isFinished: false,
+    lessons: [],
+    _id: GenerateObjectId(),
+  };
+  const [form, setForm] = useState(initialState);
   const [open, setOpen] = React.useState(false);
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleOpen = () => {
+    // dispatch(changeActualChapter(id));
     setOpen(true);
   };
 
@@ -44,11 +60,14 @@ const Chapters = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log("FormChapter", form);
+    setForm({ ...form, _id: GenerateObjectId() });
+    console.log("FormChapters", form);
+
     e.preventDefault();
     dispatch(createChapter(form, id));
     handleClose();
   };
+
   return (
     <>
       <Topbar name="Rodziały" />

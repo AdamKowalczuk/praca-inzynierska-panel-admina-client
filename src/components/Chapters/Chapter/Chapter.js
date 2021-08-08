@@ -9,9 +9,12 @@ import Lesson from "../../../images/board.svg";
 import {
   changeActualChapter,
   updateChapter,
+  deleteChapter,
+  // deleteChapter,
   // setCourseName,
 } from "../../../actions/courses";
 import "../../../modal.scss";
+import Delete from "../../../images/delete.svg";
 import { useDispatch, useSelector } from "react-redux";
 const Chapter = ({ chapter, id }) => {
   const dispatch = useDispatch();
@@ -20,10 +23,16 @@ const Chapter = ({ chapter, id }) => {
     description: chapter.description,
     isFinished: chapter.isFinished,
     lessons: chapter.lessons,
+    _id: chapter._id,
   };
+  const courses = useSelector((state) => state.courses);
+  const actualCourse = useSelector((state) => state.actualCourse);
+  const courseId = courses[actualCourse]._id;
+  // const actualChapter = useSelector((state) => state.actualChapter);
   const [open, setOpen] = React.useState(false);
   const [form, setForm] = useState(initialState);
   const handleOpen = () => {
+    dispatch(changeActualChapter(id));
     setOpen(true);
   };
   const handleChange = (e) =>
@@ -34,7 +43,8 @@ const Chapter = ({ chapter, id }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateChapter(form, chapter._id));
+    console.log("ChapterFORM", form);
+    dispatch(updateChapter(form, form._id));
     handleClose();
   };
 
@@ -46,6 +56,16 @@ const Chapter = ({ chapter, id }) => {
           alt="pen"
           className="edit-icon"
           onClick={() => handleOpen()}
+        />
+        <img
+          src={Delete}
+          alt="delete"
+          className="modal-delete-icon"
+          onClick={() =>
+            dispatch(
+              deleteChapter(courseId, chapter._id, { actualChapter: id })
+            )
+          }
         />
         <Modal
           open={open}

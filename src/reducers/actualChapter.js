@@ -1,6 +1,15 @@
 import { CHANGE_ACTUAL_CHAPTER } from "../constants/actionTypes.js";
 
-export default (actualChapter = "", action) => {
+// export default (actualChapter = "", action) => {
+//   switch (action.type) {
+//     case CHANGE_ACTUAL_CHAPTER:
+//       return action.payload;
+//     default:
+//       return actualChapter;
+//   }
+// };
+
+const actualChapter = (actualChapter = "", action) => {
   switch (action.type) {
     case CHANGE_ACTUAL_CHAPTER:
       return action.payload;
@@ -8,3 +17,5 @@ export default (actualChapter = "", action) => {
       return actualChapter;
   }
 };
+
+export default actualChapter;

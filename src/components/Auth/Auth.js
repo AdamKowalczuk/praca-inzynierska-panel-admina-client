@@ -9,7 +9,7 @@ import { signin } from "../../actions/auth";
 // import useStyles from "./styles";
 import Input from "./Input";
 // import GoogleIcon from "./icon";
-import SecureLogin from "../../images/secure_login.svg";
+import Typewriter from "../../images/typewriter.svg";
 import "./auth.scss";
 import "./input.scss";
 
@@ -43,13 +43,13 @@ const SignUp = () => {
       <div className="auth-container">
         <form onSubmit={handleSubmit}>
           <div className="form-container">
-            {isSignup ? null : <img src={SecureLogin} alt="Secure Login" />}
-            {isSignup && (
+            {isSignup ? null : <img src={Typewriter} alt="Secure Login" />}
+            {/* {isSignup && (
               <>
                 <div className="input-container">
                   <Input
                     name="firstName"
-                    label="First Name"
+                    label="Imię"
                     handleChange={handleChange}
                     autoFocus
                     color="#f1f1f2"
@@ -58,30 +58,30 @@ const SignUp = () => {
                   />
                   <Input
                     name="lastName"
-                    label="Last Name"
+                    label="Nazwisko"
                     handleChange={handleChange}
                     type="input"
                     className="last-name"
                   />
                 </div>
               </>
-            )}
+            )} */}
             <Input
               name="email"
-              label="Email Address"
+              label="Adres email"
               handleChange={handleChange}
               type="email"
             />
             <Input
               name="password"
-              label="Password"
+              label="Hasło"
               handleChange={handleChange}
               type={showPassword ? "text" : "password"}
               handleShowPassword={handleShowPassword}
             />
             <Button2
               type="submit"
-              text="SIGN IN"
+              text="Zaloguj się"
               class="btn btn_white"
             ></Button2>
           </div>

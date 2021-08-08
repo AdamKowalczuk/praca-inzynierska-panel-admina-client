@@ -1,10 +1,11 @@
 // $primary: #11998e;
 // $secondary: #38ef7d;
 // $white: #fff;
-$gray: #9b9b9b;
-
-$dark: #0c0c0d;
-$white: #f1f1f2;
+$dark: #2f3749;
+$gray: #363f50;
+$white: #ffffff;
+$green: #22ca96;
+$red: #ff4e40;
 
 .input-container {
   display: grid;
@@ -35,19 +36,22 @@ $white: #f1f1f2;
 .MuiOutlinedInput-notchedOutline {
   //border
   // color: $white;
-  border-color: $white !important;
+  border-color: $green !important;
   // width: 80%;
 }
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: $white !important;
+  border-color: $green !important;
 }
 
 .MuiFormLabel-root {
-  color: #f1f1f2 !important;
+  color: $green !important;
 }
 .MuiInputBase-input {
-  color: $white !important;
+  color: $green !important;
 }
 .MuiIconButton-label {
   justify-content: flex-end !important;
+  .MuiSvgIcon-root {
+    fill: $green !important;
+  }
 }

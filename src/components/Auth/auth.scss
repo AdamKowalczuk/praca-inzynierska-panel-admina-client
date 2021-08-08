@@ -1,5 +1,11 @@
-$dark: #0c0c0d;
-$white: #f1f1f2;
+// $dark: #0c0c0d;
+// $white: #f1f1f2;
+
+$dark: #2f3749;
+$gray: #363f50;
+$white: #ffffff;
+$green: #22ca96;
+$red: #ff4e40;
 
 @media only screen and (min-width: 800px) {
   .auth-container {
@@ -19,11 +25,7 @@ $white: #f1f1f2;
         height: 200px;
         margin: 0px auto !important;
         margin-bottom: 10px !important;
-        // width: 60%;
-        // margin: 0% 20%;
-        // margin-bottom: 20px;
       }
-      color: $white;
     }
   }
 }
@@ -40,9 +42,6 @@ $white: #f1f1f2;
       height: 142px;
       margin: 0px auto !important;
       margin-bottom: 10px !important;
-      // width: 60%;
-      // margin: 0% 20%;
-      // margin-bottom: 20px;
     }
     color: $white;
     form {

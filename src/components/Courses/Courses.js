@@ -8,12 +8,12 @@ import Button from "../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
 import Modal from "@material-ui/core/Modal";
 import { createCourse } from "../../actions/courses";
-import {
-  changeCourseName,
-  changeCourseDescription,
-  changeActualCourse,
-  // setCourseName,
-} from "../../actions/courses";
+// import {
+//   changeCourseName,
+//   changeCourseDescription,
+//   changeActualCourse,
+//   setCourseName,
+// } from "../../actions/courses";
 
 const initialState = {
   name: "",
@@ -25,8 +25,9 @@ const Courses = ({ setCurrentId }) => {
   const [form, setForm] = useState(initialState);
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.courses);
-  const courseName = useSelector((state) => state.courseName);
-  const courseDescription = useSelector((state) => state.courseDescription);
+  // console.log(courses);
+  // const courseName = useSelector((state) => state.courseName);
+  // const courseDescription = useSelector((state) => state.courseDescription);
   // let newCourseModal = false;
   const [open, setOpen] = React.useState(false);
   const handleChange = (e) =>

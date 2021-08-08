@@ -1,29 +1,28 @@
 import React from "react";
 import "./lesson.scss";
-import { Link } from "react-router-dom";
-import AssignmentIcon from "@material-ui/icons/Assignment";
-import AssessmentIcon from "@material-ui/icons/Assessment";
-import EditIcon from "@material-ui/icons/Edit";
+// import { Link } from "react-router-dom";
+// import AssignmentIcon from "@material-ui/icons/Assignment";
+// import AssessmentIcon from "@material-ui/icons/Assessment";
+// import EditIcon from "@material-ui/icons/Edit";
 import Modal from "@material-ui/core/Modal";
 import Button from "../../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
 import Pen from "../../../images/pen.svg";
 import OpenBook from "../../../images/open-book.svg";
 import "../../../modal.scss";
-import {
-  changeCourseName,
-  changeCourseDescription,
-  changeActualCourse,
-  changeActualChapter,
-  // setCourseName,
-} from "../../../actions/courses";
+import { changeActualLesson, deleteLesson } from "../../../actions/courses";
+import Delete from "../../../images/delete.svg";
 import { useDispatch, useSelector } from "react-redux";
 const Lesson = ({ lesson, id }) => {
   const dispatch = useDispatch();
+  const courses = useSelector((state) => state.courses);
+  const actualCourse = useSelector((state) => state.actualCourse);
+  const actualLesson = useSelector((state) => state.actualLesson);
+  const courseId = courses[actualCourse]._id;
+  const actualChapter = useSelector((state) => state.actualChapter);
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
-    // console.log(courseName);
     setOpen(true);
   };
 
@@ -31,9 +30,9 @@ const Lesson = ({ lesson, id }) => {
     setOpen(false);
   };
 
-  const handleSubmit = async (e, id) => {
-    // e.preventDefault();
-  };
+  // const handleSubmit = async (e, id) => {
+  //   e.preventDefault();
+  // };
   return (
     <>
       <div className="course-container">
@@ -41,7 +40,26 @@ const Lesson = ({ lesson, id }) => {
           src={Pen}
           alt="pen"
           className="edit-icon"
-          onClick={() => handleOpen()}
+          onClick={() => {
+            dispatch(changeActualLesson(id));
+            handleOpen();
+          }}
+        />
+        <img
+          src={Delete}
+          alt="delete"
+          className="modal-delete-icon"
+          onClick={() => {
+            dispatch(changeActualLesson(id));
+            dispatch(
+              deleteLesson(
+                courseId,
+                courses[actualCourse].chapters[actualChapter]._id,
+                lesson._id,
+                { actualLesson: id }
+              )
+            );
+          }}
         />
         <Modal
           open={open}
@@ -94,9 +112,6 @@ const Lesson = ({ lesson, id }) => {
           alt={lesson.name}
         />
         <h3>{lesson.description}</h3>
-        {/* <div className="chapters-lessons-container">
-
-  </div> */}
       </div>
     </>
   );
