@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./lesson.scss";
 // import { Link } from "react-router-dom";
 // import AssignmentIcon from "@material-ui/icons/Assignment";
@@ -13,26 +13,60 @@ import "../../../modal.scss";
 import { changeActualLesson, deleteLesson } from "../../../actions/courses";
 import Delete from "../../../images/delete.svg";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  changeActualChapter,
+  updateChapter,
+  deleteChapter,
+  updateLesson,
+  // deleteChapter,
+  // setCourseName,
+} from "../../../actions/courses";
 const Lesson = ({ lesson, id }) => {
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.courses);
   const actualCourse = useSelector((state) => state.actualCourse);
+  const actualChapter = useSelector((state) => state.actualChapter);
   const actualLesson = useSelector((state) => state.actualLesson);
   const courseId = courses[actualCourse]._id;
-  const actualChapter = useSelector((state) => state.actualChapter);
+  const chapterId = courses[actualCourse].chapters[actualChapter]._id;
   const [open, setOpen] = React.useState(false);
+  function GenerateObjectId() {
+    var ObjectId = (
+      m = Math,
+      d = Date,
+      h = 16,
+      s = (s) => m.floor(s).toString(h)
+    ) =>
+      s(d.now() / 1000) + " ".repeat(h).replace(/./g, () => s(m.random() * h));
+
+    return ObjectId();
+  }
+  const initialState = {
+    name: lesson.name,
+    description: lesson.description,
+    isFinished: lesson.isFinished,
+    _id: GenerateObjectId(),
+    actualChapter: actualChapter,
+    actualLesson: id,
+  };
+  const [form, setForm] = useState(initialState);
 
   const handleOpen = () => {
     setOpen(true);
   };
-
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
   const handleClose = (id) => {
     setOpen(false);
   };
 
-  // const handleSubmit = async (e, id) => {
-  //   e.preventDefault();
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("ChapterFORM", form);
+    dispatch(updateLesson(form, courseId, chapterId, form._id));
+
+    handleClose();
+  };
   return (
     <>
       <div className="course-container">
@@ -75,19 +109,24 @@ const Lesson = ({ lesson, id }) => {
               />
             </div>
 
-            <form action="post">
+            <form action="patch" onSubmit={handleSubmit}>
               <label htmlFor="name">
                 <h3>Nazwa lekcji</h3>
               </label>
-              <input type="text" value={lesson.name} name="courseName" />
+              <input
+                type="text"
+                onChange={handleChange}
+                value={form.name}
+                name="name"
+              />
 
               <label htmlFor="description">
                 <h3>Opis lekcji</h3>
               </label>
               <textarea
                 type="text"
-                value={lesson.description}
-                id="description"
+                value={form.description}
+                onChange={handleChange}
                 name="description"
               />
               <div className="add-photo-container">

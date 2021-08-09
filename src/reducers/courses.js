@@ -4,6 +4,8 @@ import {
   CREATE_COURSE,
   CREATE_CHAPTER,
   UPDATE_COURSE,
+  UPDATE_CHAPTER,
+  UPDATE_LESSON,
   DELETE_COURSE,
   CREATE_LESSON,
   DELETE_CHAPTER,
@@ -23,13 +25,26 @@ const courses = (courses = [], action) => {
       return courses.map((course) =>
         course._id === action.payload._id ? action.payload : course
       );
+    case UPDATE_CHAPTER:
+      return courses.map((course) => {
+        if (course._id === action.courseId) {
+          course.chapters[action.actualChapter] = action.chapter;
+        }
+        return course;
+      });
+    case UPDATE_LESSON:
+      return courses.map((course) => {
+        if (course._id === action.courseId) {
+          course.chapters[action.actualChapter].lessons[action.actualLesson] =
+            action.lesson;
+        }
+        return course;
+      });
     case CREATE_CHAPTER:
       return courses.map((course) => {
         if (course._id === action.id) {
           course.chapters.push(action.payload);
-          // return course;
         }
-
         return course;
       });
     case CREATE_LESSON:
@@ -48,7 +63,7 @@ const courses = (courses = [], action) => {
     case DELETE_CHAPTER:
       return courses.map((course) => {
         if (course._id === action.courseId) {
-          course.chapters.splice(action.actualChapter.actualChapter, 1);
+          course.chapters.splice(action.actualChapter, 1);
         }
         return course;
       });
@@ -57,7 +72,7 @@ const courses = (courses = [], action) => {
         if (course._id === action.courseId) {
           course.chapters.map((chapter) => {
             if (chapter._id === action.chapterId) {
-              chapter.lessons.splice(action.actualLesson.actualLesson, 1);
+              chapter.lessons.splice(action.actualLesson, 1);
             }
           });
         }

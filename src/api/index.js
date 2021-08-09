@@ -17,14 +17,16 @@ export const fetchCourses = () => API.get("/courses");
 export const fetchCourse = (id) => API.get(`/courses/${id}`);
 
 export const signIn = (formData) => API.post("/userAdmin/signin", formData);
-// export const signUp = (formData) => API.post("/userAdmin/signup", formData);
 export const createCourse = (newCourse) => axios.post(url_course, newCourse);
-export const updateCourse = (updatedCourse, id) =>
-  axios.patch(`${url_course}/${id}`, updatedCourse);
-export const updateChapter = (updatedChapter, id) =>
-  axios.patch(`${url_course}/${id}`, updatedChapter);
-export const updateLesson = (updatedLesson, id) =>
-  axios.patch(`${url_course}/${id}`, updatedLesson);
+export const updateCourse = (updatedCourse, courseId) =>
+  axios.patch(`${url_course}/${courseId}`, updatedCourse);
+export const updateChapter = (chapter, courseId, chapterId) =>
+  axios.patch(`${url_course}/${courseId}/chapters/${chapterId}`, chapter);
+export const updateLesson = (lesson, courseId, chapterId, lessonId) =>
+  axios.patch(
+    `${url_course}/${courseId}/chapters/${chapterId}/lessons/${lessonId}`,
+    lesson
+  );
 
 export const createChapter = (newChapter, id) =>
   axios.post(`${url_course}/${id}/chapters`, newChapter);
@@ -37,11 +39,12 @@ export const createLesson = (newLesson, courseId, chapterId) =>
 export const deleteCourse = (courseId) =>
   axios.delete(`${url_course}/${courseId}`);
 export const deleteChapter = (courseId, chapterId, actualChapter) => {
+  console.log("deleteChapter api");
   console.log(courseId, chapterId, actualChapter);
-  axios.patch(`${url_course}/${courseId}/chapters/${chapterId}`, actualChapter);
+  axios.post(`${url_course}/${courseId}/chapters/${chapterId}`, actualChapter);
 };
 export const deleteLesson = (courseId, chapterId, lessonId, actualLesson) =>
-  axios.patch(
+  axios.post(
     `${url_course}/${courseId}/chapters/${chapterId}/lessons/${lessonId}`,
     actualLesson
   );

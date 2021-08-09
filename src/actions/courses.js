@@ -18,7 +18,6 @@ import * as api from "../api/index.js";
 export const getCourses = () => async (dispatch) => {
   try {
     const { data } = await api.fetchCourses();
-    console.log("Get Courses", data);
     dispatch({ type: FETCH_ALL_COURSES, payload: data });
   } catch (error) {
     console.log(error.message);
@@ -45,33 +44,50 @@ export const createCourse = (course) => async (dispatch) => {
     console.log(error.message);
   }
 };
-export const updateCourse = (course, id) => async (dispatch) => {
+export const updateCourse = (course, courseId) => async (dispatch) => {
   try {
-    const { data } = await api.updateCourse(course, id);
-    console.log("Data", data);
-    console.log("Id", id);
+    const { data } = await api.updateCourse(course, courseId);
     dispatch({ type: UPDATE_COURSE, payload: data });
   } catch (error) {
     console.log(error.message);
   }
 };
-export const updateChapter = (chapter, id) => async (dispatch) => {
-  try {
-    // const { data } = await api.updateChapter(chapter, id);
-    console.log("Update Chapter actions id", id);
-    // dispatch({ type: UPDATE_CHAPTER, payload: data });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-export const updateLesson = (lesson, id) => async (dispatch) => {
-  try {
-    const { data } = await api.updateLesson(lesson, id);
-    dispatch({ type: UPDATE_LESSON, payload: data });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
+
+export const updateChapter =
+  (chapter, courseId, chapterId) => async (dispatch) => {
+    try {
+      const { data } = await api.updateChapter(chapter, courseId, chapterId);
+      console.log(chapter, courseId, chapterId, chapter.actualChapter);
+      dispatch({
+        type: UPDATE_CHAPTER,
+        chapter: chapter,
+        courseId: courseId,
+        actualChapter: chapter.actualChapter,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+export const updateLesson =
+  (lesson, courseId, chapterId, lessonId) => async (dispatch) => {
+    try {
+      const { data } = await api.updateLesson(
+        lesson,
+        courseId,
+        chapterId,
+        lessonId
+      );
+      dispatch({
+        type: UPDATE_LESSON,
+        lesson: lesson,
+        courseId: courseId,
+        actualChapter: lesson.actualChapter,
+        actualLesson: lesson.actualLesson,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 export const createChapter = (chapter, id) => async (dispatch) => {
   try {
     const { data } = await api.createChapter(chapter, id);
@@ -109,13 +125,13 @@ export const deleteCourse = (courseId) => async (dispatch) => {
 export const deleteChapter =
   (courseId, chapterId, actualChapter) => async (dispatch) => {
     try {
-      console.log(courseId, chapterId, actualChapter);
       await api.deleteChapter(courseId, chapterId, actualChapter);
+
       dispatch({
         type: DELETE_CHAPTER,
         courseId: courseId,
         chapterId: chapterId,
-        actualChapter: actualChapter,
+        actualChapter: actualChapter.actualChapter,
       });
     } catch (error) {
       console.log(error.message);
@@ -130,7 +146,7 @@ export const deleteLesson =
         courseId: courseId,
         chapterId: chapterId,
         lessonId: lessonId,
-        actualLesson: actualLesson,
+        actualLesson: actualLesson.actualLesson,
       });
     } catch (error) {
       console.log(error.message);

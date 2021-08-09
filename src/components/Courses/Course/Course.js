@@ -21,6 +21,7 @@ const Course = ({ course, id }) => {
   // let [courseName, courseDescription] = useState(false);
   const dispatch = useDispatch();
   // console.log(course);
+  // console.log(course._id);
   // const courses = useSelector((state) => state.courses);
   const initialState = {
     name: course.name,

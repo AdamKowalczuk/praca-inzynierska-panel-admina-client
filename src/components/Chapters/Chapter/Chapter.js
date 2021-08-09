@@ -18,17 +18,28 @@ import Delete from "../../../images/delete.svg";
 import { useDispatch, useSelector } from "react-redux";
 const Chapter = ({ chapter, id }) => {
   const dispatch = useDispatch();
+  function GenerateObjectId() {
+    var ObjectId = (
+      m = Math,
+      d = Date,
+      h = 16,
+      s = (s) => m.floor(s).toString(h)
+    ) =>
+      s(d.now() / 1000) + " ".repeat(h).replace(/./g, () => s(m.random() * h));
+
+    return ObjectId();
+  }
+  const courses = useSelector((state) => state.courses);
+  const actualCourse = useSelector((state) => state.actualCourse);
+  const courseId = courses[actualCourse]._id;
   const initialState = {
     name: chapter.name,
     description: chapter.description,
     isFinished: chapter.isFinished,
     lessons: chapter.lessons,
-    _id: chapter._id,
+    _id: GenerateObjectId(),
+    actualChapter: id,
   };
-  const courses = useSelector((state) => state.courses);
-  const actualCourse = useSelector((state) => state.actualCourse);
-  const courseId = courses[actualCourse]._id;
-  // const actualChapter = useSelector((state) => state.actualChapter);
   const [open, setOpen] = React.useState(false);
   const [form, setForm] = useState(initialState);
   const handleOpen = () => {
@@ -44,7 +55,7 @@ const Chapter = ({ chapter, id }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("ChapterFORM", form);
-    dispatch(updateChapter(form, form._id));
+    dispatch(updateChapter(form, courseId, form._id));
     handleClose();
   };
 
