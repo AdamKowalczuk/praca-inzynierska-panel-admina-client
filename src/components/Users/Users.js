@@ -25,6 +25,9 @@ const Users = ({ setCurrentId }) => {
               <th>
                 <h2>Email</h2>
               </th>
+              <th>
+                <h2>Data dołączenia</h2>
+              </th>
               <th className="th-delete-user">
                 <h2>Usuń</h2>
               </th>

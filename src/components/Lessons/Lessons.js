@@ -9,14 +9,7 @@ import Plus from "../../images/plus.svg";
 import Button from "../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
 import OpenBook from "../../images/open-book.svg";
-import {
-  // changeCourseName,
-  // changeCourseDescription,
-  // changeActualCourse,
-  // changeActualLesson,
-  createLesson,
-  // setCourseName,
-} from "../../actions/courses";
+import { createLesson } from "../../actions/courses";
 const Lessons = () => {
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.courses);
@@ -24,8 +17,6 @@ const Lessons = () => {
   const actualCourse = useSelector((state) => state.actualCourse);
   const courseId = courses[actualCourse]._id;
   const chapterId = courses[actualCourse].chapters[actualChapter]._id;
-
-  // const id = courses[actualCourse]._id;
   const lessons = useSelector(
     (state) => state.courses[actualCourse].chapters[actualChapter].lessons
   );
@@ -54,7 +45,6 @@ const Lessons = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleOpen = () => {
-    // dispatch(changeActualChapter(id));
     setOpen(true);
   };
 
@@ -64,7 +54,6 @@ const Lessons = () => {
 
   const handleSubmit = (e) => {
     setForm({ ...form, _id: GenerateObjectId() });
-    console.log("FormLessons", form);
     e.preventDefault();
     dispatch(createLesson(form, courseId, chapterId));
     handleClose();
@@ -81,8 +70,15 @@ const Lessons = () => {
         aria-describedby="simple-modal-description"
       >
         <div className="modal">
-          <div className="modal-top">
-            <CloseIcon className="close-icon" onClick={() => handleClose()} />
+          <div
+            className="modal-top"
+            style={{ backgroundColor: courses[actualCourse].color }}
+          >
+            <CloseIcon
+              className="close-icon"
+              style={{ color: courses[actualCourse].color }}
+              onClick={() => handleClose()}
+            />
           </div>
 
           <form action="post" onSubmit={handleSubmit}>
@@ -96,13 +92,24 @@ const Lessons = () => {
             </label>
             <textarea type="text" onChange={handleChange} name="description" />
             <div className="add-photo-container">
-              <img src={OpenBook} className="add-photo" alt="open book" />
-              <p className="add-photo-text">Dodaj zdjęcie</p>
+              <img
+                src={OpenBook}
+                className="add-photo"
+                alt="open book"
+                style={{ backgroundColor: courses[actualCourse].color }}
+              />
+              <p
+                className="add-photo-text"
+                style={{ backgroundColor: courses[actualCourse].color }}
+              >
+                Dodaj zdjęcie
+              </p>
             </div>
 
             <div className="modal-button-container">
               <Button
                 type="submit"
+                color={courses[actualCourse].color}
                 text="Zatwierdź zmiany"
                 class="btn modal-button"
               ></Button>

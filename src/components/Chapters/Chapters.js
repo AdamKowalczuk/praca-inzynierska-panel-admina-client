@@ -8,15 +8,7 @@ import Plus from "../../images/plus.svg";
 import Button from "../Button/Button";
 import Modal from "@material-ui/core/Modal";
 import CloseIcon from "@material-ui/icons/Close";
-// import { createChapter } from "../../actions/courses";
-import {
-  // changeCourseName,
-  // changeCourseDescription,
-  // changeActualCourse,
-  changeActualChapter,
-  createChapter,
-  // setCourseName,
-} from "../../actions/courses";
+import { createChapter } from "../../actions/courses";
 
 const Chapters = () => {
   const dispatch = useDispatch();
@@ -24,8 +16,6 @@ const Chapters = () => {
   const courses = useSelector((state) => state.courses);
   const actualCourse = useSelector((state) => state.actualCourse);
   const id = courses[actualCourse]._id;
-  // console.log(courses);
-  // console.log(id);
   function GenerateObjectId() {
     var ObjectId = (
       m = Math,
@@ -51,7 +41,6 @@ const Chapters = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleOpen = () => {
-    // dispatch(changeActualChapter(id));
     setOpen(true);
   };
 
@@ -61,8 +50,6 @@ const Chapters = () => {
 
   const handleSubmit = (e) => {
     setForm({ ...form, _id: GenerateObjectId() });
-    console.log("FormChapters", form);
-
     e.preventDefault();
     dispatch(createChapter(form, id));
     handleClose();
@@ -79,35 +66,31 @@ const Chapters = () => {
         aria-describedby="simple-modal-description"
       >
         <div className="modal">
-          <div className="modal-top">
-            <CloseIcon className="close-icon" onClick={() => handleClose()} />
+          <div
+            className="modal-top"
+            style={{ backgroundColor: courses[actualCourse].color }}
+          >
+            <CloseIcon
+              className="close-icon"
+              style={{ color: courses[actualCourse].color }}
+              onClick={() => handleClose()}
+            />
           </div>
 
           <form action="post" onSubmit={handleSubmit}>
             <label htmlFor="name">
               <h3>Nazwa rozdziału</h3>
             </label>
-            <input
-              type="text"
-              onChange={handleChange}
-              name="name"
-              // value={courseName}
-              // onChange={(e) => onChangeCourseName(e.target.value)}
-            />
+            <input type="text" onChange={handleChange} name="name" />
 
             <label htmlFor="description">
               <h3>Opis rozdziału</h3>
             </label>
-            <textarea
-              type="text"
-              // value={courseDescription}
-              // onChange={(e) => onChangeCourseDescription(e.target.value)}
-              onChange={handleChange}
-              name="description"
-            />
+            <textarea type="text" onChange={handleChange} name="description" />
             <div className="modal-button-container">
               <Button
                 type="submit"
+                color={courses[actualCourse].color}
                 text="Dodaj kurs"
                 class="btn modal-button"
               ></Button>

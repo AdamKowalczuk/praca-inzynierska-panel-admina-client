@@ -67,11 +67,13 @@ const Chapter = ({ chapter, id }) => {
           alt="pen"
           className="edit-icon"
           onClick={() => handleOpen()}
+          style={{ backgroundColor: courses[actualCourse].color }}
         />
         <img
           src={Delete}
           alt="delete"
           className="modal-delete-icon"
+          style={{ backgroundColor: courses[actualCourse].color }}
           onClick={() =>
             dispatch(
               deleteChapter(courseId, chapter._id, { actualChapter: id })
@@ -85,8 +87,15 @@ const Chapter = ({ chapter, id }) => {
           aria-describedby="simple-modal-description"
         >
           <div className="modal">
-            <div className="modal-top">
-              <CloseIcon className="close-icon" onClick={() => handleClose()} />
+            <div
+              className="modal-top"
+              style={{ backgroundColor: courses[actualCourse].color }}
+            >
+              <CloseIcon
+                className="close-icon"
+                style={{ color: courses[actualCourse].color }}
+                onClick={() => handleClose()}
+              />
             </div>
 
             <form action="patch" onSubmit={handleSubmit}>
@@ -112,6 +121,7 @@ const Chapter = ({ chapter, id }) => {
               <div className="modal-button-container">
                 <Button
                   type="submit"
+                  color={courses[actualCourse].color}
                   text="Zatwierdź zmiany"
                   class="btn modal-button"
                 ></Button>
@@ -119,12 +129,17 @@ const Chapter = ({ chapter, id }) => {
             </form>
           </div>
         </Modal>
-        <h2 className="futura ">{chapter.name}</h2>
+        <h2 className="futura" style={{ color: courses[actualCourse].color }}>
+          {chapter.name}
+        </h2>
         <h3>{chapter.description}</h3>
         <div className="chapters-lessons-container">
           <Link className="link" to="/admin/lekcje">
             <h4
-              style={{ cursor: "pointer" }}
+              style={{
+                cursor: "pointer",
+                backgroundColor: courses[actualCourse].color,
+              }}
               onClick={() => dispatch(changeActualChapter(id))}
             >
               <img src={Lesson} alt="lesson" />

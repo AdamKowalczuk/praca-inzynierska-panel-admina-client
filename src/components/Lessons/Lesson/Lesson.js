@@ -13,20 +13,13 @@ import "../../../modal.scss";
 import { changeActualLesson, deleteLesson } from "../../../actions/courses";
 import Delete from "../../../images/delete.svg";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  changeActualChapter,
-  updateChapter,
-  deleteChapter,
-  updateLesson,
-  // deleteChapter,
-  // setCourseName,
-} from "../../../actions/courses";
+import { updateLesson } from "../../../actions/courses";
 const Lesson = ({ lesson, id }) => {
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.courses);
   const actualCourse = useSelector((state) => state.actualCourse);
   const actualChapter = useSelector((state) => state.actualChapter);
-  const actualLesson = useSelector((state) => state.actualLesson);
+
   const courseId = courses[actualCourse]._id;
   const chapterId = courses[actualCourse].chapters[actualChapter]._id;
   const [open, setOpen] = React.useState(false);
@@ -62,9 +55,7 @@ const Lesson = ({ lesson, id }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("ChapterFORM", form);
     dispatch(updateLesson(form, courseId, chapterId, form._id));
-
     handleClose();
   };
   return (
@@ -74,6 +65,7 @@ const Lesson = ({ lesson, id }) => {
           src={Pen}
           alt="pen"
           className="edit-icon"
+          style={{ backgroundColor: courses[actualCourse].color }}
           onClick={() => {
             dispatch(changeActualLesson(id));
             handleOpen();
@@ -83,6 +75,7 @@ const Lesson = ({ lesson, id }) => {
           src={Delete}
           alt="delete"
           className="modal-delete-icon"
+          style={{ backgroundColor: courses[actualCourse].color }}
           onClick={() => {
             dispatch(changeActualLesson(id));
             dispatch(
@@ -102,10 +95,14 @@ const Lesson = ({ lesson, id }) => {
           aria-describedby="simple-modal-description"
         >
           <div className="modal">
-            <div className="modal-top">
+            <div
+              className="modal-top"
+              style={{ backgroundColor: courses[actualCourse].color }}
+            >
               <CloseIcon
                 className="close-icon"
                 onClick={() => handleClose(id)}
+                style={{ color: courses[actualCourse].color }}
               />
             </div>
 
@@ -130,13 +127,24 @@ const Lesson = ({ lesson, id }) => {
                 name="description"
               />
               <div className="add-photo-container">
-                <img src={OpenBook} className="add-photo" alt="open book" />
-                <p className="add-photo-text">Dodaj zdjęcie</p>
+                <img
+                  src={OpenBook}
+                  className="add-photo"
+                  alt="open book"
+                  style={{ backgroundColor: courses[actualCourse].color }}
+                />
+                <p
+                  className="add-photo-text"
+                  style={{ backgroundColor: courses[actualCourse].color }}
+                >
+                  Dodaj zdjęcie
+                </p>
               </div>
 
               <div className="modal-button-container">
                 <Button
                   type="submit"
+                  color={courses[actualCourse].color}
                   text="Zatwierdź zmiany"
                   class="btn modal-button"
                 ></Button>
@@ -144,7 +152,9 @@ const Lesson = ({ lesson, id }) => {
             </form>
           </div>
         </Modal>
-        <h2 className="futura ">{lesson.name}</h2>
+        <h2 className="futura" style={{ color: courses[actualCourse].color }}>
+          {lesson.name}
+        </h2>
         <img
           style={{ width: "70%", marginLeft: "15%" }}
           src={OpenBook}

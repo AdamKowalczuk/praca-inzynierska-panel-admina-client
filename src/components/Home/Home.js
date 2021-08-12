@@ -20,12 +20,11 @@ const Home = () => {
   function getNewUsersNumber() {
     let sum = 0;
     users.forEach((user) => {
-      let year = moment(user.courses[0].createdAt).format("YYYY");
-      let month = moment(user.courses[0].createdAt).format("MM");
-      let day = moment(user.courses[0].createdAt).format("DD");
+      let year = moment(user.createdAt).format("YYYY");
+      let month = moment(user.createdAt).format("MM");
+      let day = moment(user.createdAt).format("DD");
       var date2 = new Date(year, month, day);
       var diff = new DateDiff(startDate, date2);
-
       if (diff.days() < 8) {
         sum += 1;
       }

@@ -11,18 +11,13 @@ import {
   changeActualCourse,
   updateCourse,
   deleteCourse,
-  // setCourseName,
 } from "../../../actions/courses";
 import "../../../modal.scss";
 import { useDispatch } from "react-redux";
 import Delete from "../../../images/delete.svg";
 
 const Course = ({ course, id }) => {
-  // let [courseName, courseDescription] = useState(false);
   const dispatch = useDispatch();
-  // console.log(course);
-  // console.log(course._id);
-  // const courses = useSelector((state) => state.courses);
   const initialState = {
     name: course.name,
     description: course.description,
@@ -64,12 +59,18 @@ const Course = ({ course, id }) => {
           alt="pen"
           className="edit-icon"
           onClick={() => handleOpen()}
+          style={{
+            backgroundColor: course.color,
+          }}
         />
         <img
           src={Delete}
           alt="delete"
           className="modal-delete-icon"
           onClick={() => dispatch(deleteCourse(course._id))}
+          style={{
+            backgroundColor: course.color,
+          }}
         />
 
         <Modal
@@ -79,8 +80,19 @@ const Course = ({ course, id }) => {
           aria-describedby="simple-modal-description"
         >
           <div className="modal">
-            <div className="modal-top">
-              <CloseIcon className="close-icon" onClick={() => handleClose()} />
+            <div
+              className="modal-top"
+              style={{
+                backgroundColor: course.color,
+              }}
+            >
+              <CloseIcon
+                className="close-icon"
+                style={{
+                  color: course.color,
+                }}
+                onClick={() => handleClose()}
+              />
             </div>
 
             <form action="patch" onSubmit={handleSubmit}>
@@ -107,18 +119,30 @@ const Course = ({ course, id }) => {
                 <Button
                   type="submit"
                   text="Zatwierdź zmiany"
+                  color={course.color}
                   class="btn modal-button"
                 ></Button>
               </div>
             </form>
           </div>
         </Modal>
-        <h2 className="futura ">{course.name}</h2>
+        <h2
+          className="futura "
+          style={{
+            color: course.color,
+          }}
+        >
+          {course.name}
+        </h2>
         <h3>{course.description}</h3>
         <div className="chapters-lessons-container">
           <Link className="link" to="/admin/rozdziały">
             <h4
-              style={{ cursor: "pointer" }}
+              style={{
+                cursor: "pointer",
+                // color: course.color,
+                backgroundColor: course.color,
+              }}
               onClick={() => dispatch(changeActualCourse(id))}
             >
               <img src={OpenBook} alt="lesson" />
@@ -126,7 +150,11 @@ const Course = ({ course, id }) => {
               <p className="italic">rozdziały</p>
             </h4>
           </Link>
-          <h4>
+          <h4
+            style={{
+              backgroundColor: course.color,
+            }}
+          >
             <img src={Lesson} alt="lesson" />
             <p>{sumLessons()}</p>
             <p className="italic ">lekcje</p>

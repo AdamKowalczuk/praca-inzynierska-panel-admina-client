@@ -8,13 +8,6 @@ import Button from "../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
 import Modal from "@material-ui/core/Modal";
 import { createCourse } from "../../actions/courses";
-// import {
-//   changeCourseName,
-//   changeCourseDescription,
-//   changeActualCourse,
-//   setCourseName,
-// } from "../../actions/courses";
-
 const initialState = {
   name: "",
   description: "",
@@ -25,10 +18,6 @@ const Courses = ({ setCurrentId }) => {
   const [form, setForm] = useState(initialState);
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.courses);
-  // console.log(courses);
-  // const courseName = useSelector((state) => state.courseName);
-  // const courseDescription = useSelector((state) => state.courseDescription);
-  // let newCourseModal = false;
   const [open, setOpen] = React.useState(false);
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -37,12 +26,11 @@ const Courses = ({ setCurrentId }) => {
     setOpen(true);
   };
 
-  const handleClose = (course, id) => {
+  const handleClose = () => {
     setOpen(false);
   };
 
   const handleSubmit = (e) => {
-    console.log("Form", form);
     e.preventDefault();
     dispatch(createCourse(form));
     handleClose();
@@ -66,24 +54,12 @@ const Courses = ({ setCurrentId }) => {
             <label htmlFor="name">
               <h3>Nazwa kursu</h3>
             </label>
-            <input
-              type="text"
-              onChange={handleChange}
-              name="name"
-              // value={courseName}
-              // onChange={(e) => onChangeCourseName(e.target.value)}
-            />
+            <input type="text" onChange={handleChange} name="name" />
 
             <label htmlFor="description">
               <h3>Opis kursu</h3>
             </label>
-            <textarea
-              type="text"
-              // value={courseDescription}
-              // onChange={(e) => onChangeCourseDescription(e.target.value)}
-              onChange={handleChange}
-              name="description"
-            />
+            <textarea type="text" onChange={handleChange} name="description" />
             <div className="modal-button-container">
               <Button
                 type="submit"
