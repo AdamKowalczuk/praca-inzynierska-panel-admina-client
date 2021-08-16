@@ -72,7 +72,7 @@ $red: #ff4e40;
       padding-bottom: 20px;
       color: $red;
     }
-    h3 {
+    .course-h3 {
       margin-top: 20px;
       color: $white;
       height: 250px;
@@ -80,7 +80,7 @@ $red: #ff4e40;
       overflow: scroll;
       margin-bottom: 30px;
     }
-    h3::-webkit-scrollbar {
+    .course-h3::-webkit-scrollbar {
       display: none;
     }
 

@@ -13,9 +13,15 @@ $red: #ff4e40;
   position: relative;
   color: $gray;
   outline: none;
+
   form {
     margin-top: 40px;
     padding: 0 20px 20px 20px;
+    overflow: scroll;
+    max-height: 600px;
+  }
+  form::-webkit-scrollbar {
+    display: none;
   }
   .modal-top {
     background-color: $green;

@@ -1,0 +1,23 @@
+$dark: #2f3749;
+$gray: #363f50;
+$white: #ffffff;
+$green: #22ca96;
+$red: #ff4e40;
+
+.quiz-question {
+  margin: 0 50px 20px 50px;
+  text-align: center;
+}
+.quiz-answer {
+  padding: 10px;
+  border-radius: 10px;
+  border: 3px solid $white;
+  margin: 0 20% 20px 20%;
+  text-align: center;
+}
+.correct-answer {
+  background-color: $green;
+}
+.bad-answer {
+  background-color: $red;
+}

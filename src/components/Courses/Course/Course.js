@@ -134,7 +134,7 @@ const Course = ({ course, id }) => {
         >
           {course.name}
         </h2>
-        <h3>{course.description}</h3>
+        <h3 className="course-h3">{course.description}</h3>
         <div className="chapters-lessons-container">
           <Link className="link" to="/admin/rozdziały">
             <h4

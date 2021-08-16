@@ -10,6 +10,9 @@ import {
   CREATE_LESSON,
   DELETE_CHAPTER,
   DELETE_LESSON,
+  CREATE_QUIZ,
+  UPDATE_QUIZ,
+  DELETE_QUIZ,
 } from "../constants/actionTypes.js";
 
 const courses = (courses = [], action) => {
@@ -40,6 +43,14 @@ const courses = (courses = [], action) => {
         }
         return course;
       });
+    case UPDATE_QUIZ:
+      return courses.map((course) => {
+        if (course._id === action.courseId) {
+          course.chapters[action.actualChapter].quiz[action.actualQuiz] =
+            action.quiz;
+        }
+        return course;
+      });
     case CREATE_CHAPTER:
       return courses.map((course) => {
         if (course._id === action.id) {
@@ -53,6 +64,17 @@ const courses = (courses = [], action) => {
           course.chapters.map((chapter) => {
             if (chapter._id === action.chapterId) {
               chapter.lessons.push(action.payload);
+            }
+          });
+        }
+        return course;
+      });
+    case CREATE_QUIZ:
+      return courses.map((course) => {
+        if (course._id === action.courseId) {
+          course.chapters.map((chapter) => {
+            if (chapter._id === action.chapterId) {
+              chapter.quiz.push(action.payload);
             }
           });
         }
@@ -73,6 +95,17 @@ const courses = (courses = [], action) => {
           course.chapters.map((chapter) => {
             if (chapter._id === action.chapterId) {
               chapter.lessons.splice(action.actualLesson, 1);
+            }
+          });
+        }
+        return course;
+      });
+    case DELETE_QUIZ:
+      return courses.map((course) => {
+        if (course._id === action.courseId) {
+          course.chapters.map((chapter) => {
+            if (chapter._id === action.chapterId) {
+              chapter.quiz.splice(action.actualQuiz, 1);
             }
           });
         }

@@ -10,6 +10,7 @@ import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
 import Chapters from "./components/Chapters/Chapters";
 import Lessons from "./components/Lessons/Lessons";
+import Quiz from "./components/Quizes/Quizes";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/admin/użytkownicy" exact component={Users} />
         <Route path="/admin/rozdziały" exact component={Chapters} />
         <Route path="/admin/lekcje" exact component={Lessons} />
+        <Route path="/admin/quizy" exact component={Quiz} />
       </Switch>
     </BrowserRouter>
   );

@@ -27,6 +27,11 @@ export const updateLesson = (lesson, courseId, chapterId, lessonId) =>
     `${url_course}/${courseId}/chapters/${chapterId}/lessons/${lessonId}`,
     lesson
   );
+export const updateQuiz = (quiz, courseId, chapterId, quizId) =>
+  axios.patch(
+    `${url_course}/${courseId}/chapters/${chapterId}/quiz/${quizId}`,
+    quiz
+  );
 
 export const createChapter = (newChapter, id) =>
   axios.post(`${url_course}/${id}/chapters`, newChapter);
@@ -35,6 +40,8 @@ export const createLesson = (newLesson, courseId, chapterId) =>
     `${url_course}/${courseId}/chapters/${chapterId}/lessons`,
     newLesson
   );
+export const createQuiz = (newQuiz, courseId, chapterId) =>
+  axios.post(`${url_course}/${courseId}/chapters/${chapterId}/quiz`, newQuiz);
 
 export const deleteCourse = (courseId) =>
   axios.delete(`${url_course}/${courseId}`);
@@ -47,6 +54,11 @@ export const deleteLesson = (courseId, chapterId, lessonId, actualLesson) =>
   axios.post(
     `${url_course}/${courseId}/chapters/${chapterId}/lessons/${lessonId}`,
     actualLesson
+  );
+export const deleteQuiz = (courseId, chapterId, quizId, actualQuiz) =>
+  axios.post(
+    `${url_course}/${courseId}/chapters/${chapterId}/quiz/${quizId}`,
+    actualQuiz
   );
 
 export const deleteUser = (id) => axios.delete(`${url_user}/${id}`);

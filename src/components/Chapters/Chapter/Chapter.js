@@ -16,6 +16,7 @@ import {
 import "../../../modal.scss";
 import Delete from "../../../images/delete.svg";
 import { useDispatch, useSelector } from "react-redux";
+import Quiz from "../../../images/quiz.svg";
 const Chapter = ({ chapter, id }) => {
   const dispatch = useDispatch();
   function GenerateObjectId() {
@@ -132,7 +133,7 @@ const Chapter = ({ chapter, id }) => {
         <h2 className="futura" style={{ color: courses[actualCourse].color }}>
           {chapter.name}
         </h2>
-        <h3>{chapter.description}</h3>
+        <h3 className="course-h3">{chapter.description}</h3>
         <div className="chapters-lessons-container">
           <Link className="link" to="/admin/lekcje">
             <h4
@@ -143,8 +144,21 @@ const Chapter = ({ chapter, id }) => {
               onClick={() => dispatch(changeActualChapter(id))}
             >
               <img src={Lesson} alt="lesson" />
-              <p className="italic ">liczba lekcji</p>
-              <p>{chapter.lessons.length}</p>
+              <p className="italic ">Lekcje</p>
+              {/* <p>{chapter.lessons.length}</p> */}
+            </h4>
+          </Link>
+          <Link className="link" to="/admin/quizy">
+            <h4
+              style={{
+                cursor: "pointer",
+                backgroundColor: courses[actualCourse].color,
+              }}
+              onClick={() => dispatch(changeActualChapter(id))}
+            >
+              <img src={Quiz} alt="lesson" />
+              <p className="italic ">Quizy</p>
+              {/* <p>{chapter.lessons.length}</p> */}
             </h4>
           </Link>
         </div>

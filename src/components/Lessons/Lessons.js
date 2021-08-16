@@ -10,6 +10,7 @@ import Button from "../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
 import OpenBook from "../../images/open-book.svg";
 import { createLesson } from "../../actions/courses";
+import images from "./Lesson/images";
 const Lessons = () => {
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.courses);
@@ -20,6 +21,7 @@ const Lessons = () => {
   const lessons = useSelector(
     (state) => state.courses[actualCourse].chapters[actualChapter].lessons
   );
+
   function GenerateObjectId() {
     var ObjectId = (
       m = Math,
@@ -41,6 +43,21 @@ const Lessons = () => {
   };
   const [form, setForm] = useState(initialState);
   const [open, setOpen] = React.useState(false);
+  // const changeImage = (e) => {
+  //   let image = document.getElementById("image").files[0].name;
+  //   setForm({ ...form, [e.target.name]: image });
+  // };
+  const chooseImage = (e) => {
+    console.log(e.target.src);
+    console.log(e);
+    let image = e.target.src;
+    let newImage = "";
+    for (var i = 21; i < image.length; i++) {
+      newImage += image.charAt(i);
+    }
+    setForm({ ...form, [e.target.name]: newImage });
+  };
+
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -53,6 +70,7 @@ const Lessons = () => {
   };
 
   const handleSubmit = (e) => {
+    console.log(form);
     setForm({ ...form, _id: GenerateObjectId() });
     e.preventDefault();
     dispatch(createLesson(form, courseId, chapterId));
@@ -91,21 +109,30 @@ const Lessons = () => {
               <h3>Opis lekcji</h3>
             </label>
             <textarea type="text" onChange={handleChange} name="description" />
-            <div className="add-photo-container">
-              <img
-                src={OpenBook}
-                className="add-photo"
-                alt="open book"
-                style={{ backgroundColor: courses[actualCourse].color }}
-              />
-              <p
-                className="add-photo-text"
-                style={{ backgroundColor: courses[actualCourse].color }}
-              >
-                Dodaj zdjęcie
-              </p>
+            {/* <input
+              type="file"
+              id="image"
+              name="image"
+              // value={form.image}
+              // required
+              // onChange={changeImage}
+            /> */}
+            <h3>Wybierz zdjęcie</h3>
+            <div className="images-container">
+              {images.map((image, id) => {
+                return (
+                  <img
+                    src={image.default}
+                    alt={image.default}
+                    key={id}
+                    style={{ width: "25%" }}
+                    onClick={chooseImage}
+                    id="image"
+                    name="image"
+                  />
+                );
+              })}
             </div>
-
             <div className="modal-button-container">
               <Button
                 type="submit"
@@ -129,6 +156,7 @@ const Lessons = () => {
               <img className="add-image" src={Plus} alt="plus" />
             </div>
           </div>
+          {/* <img src={newImage} alt="" /> */}
         </div>
       </div>
     </>

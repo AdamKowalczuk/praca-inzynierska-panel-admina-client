@@ -9,11 +9,18 @@ import Button from "../../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
 import Pen from "../../../images/pen.svg";
 import OpenBook from "../../../images/open-book.svg";
+import Teaching from "./images/teaching.svg";
+// import images from "./images";
+import images from "./images";
+
 import "../../../modal.scss";
-import { changeActualLesson, deleteLesson } from "../../../actions/courses";
+import {
+  changeActualLesson,
+  deleteLesson,
+  updateLesson,
+} from "../../../actions/courses";
 import Delete from "../../../images/delete.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { updateLesson } from "../../../actions/courses";
 const Lesson = ({ lesson, id }) => {
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.courses);
@@ -22,6 +29,11 @@ const Lesson = ({ lesson, id }) => {
 
   const courseId = courses[actualCourse]._id;
   const chapterId = courses[actualCourse].chapters[actualChapter]._id;
+
+  // const imageName = lesson.image;
+  // const image = imageName;
+  // const image = require(`./images/${imageName}`).default;
+
   const [open, setOpen] = React.useState(false);
   function GenerateObjectId() {
     var ObjectId = (
@@ -39,13 +51,28 @@ const Lesson = ({ lesson, id }) => {
     description: lesson.description,
     isFinished: lesson.isFinished,
     _id: GenerateObjectId(),
+    image: lesson.image,
     actualChapter: actualChapter,
     actualLesson: id,
   };
-  const [form, setForm] = useState(initialState);
 
+  const [form, setForm] = useState(initialState);
   const handleOpen = () => {
     setOpen(true);
+  };
+  // const changeImage = (e) => {
+  //   let image = document.getElementById("image").files[0].name;
+  //   setForm({ ...form, [e.target.name]: image });
+  // };
+  const chooseImage = (e) => {
+    console.log(e.target.src);
+    console.log(e);
+    let image = e.target.src;
+    let newImage = "";
+    for (var i = 21; i < image.length; i++) {
+      newImage += image.charAt(i);
+    }
+    setForm({ ...form, [e.target.name]: newImage });
   };
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -54,6 +81,10 @@ const Lesson = ({ lesson, id }) => {
   };
 
   const handleSubmit = (e) => {
+    if (form.image === "") {
+      form.image = lesson.image;
+    }
+    console.log(form);
     e.preventDefault();
     dispatch(updateLesson(form, courseId, chapterId, form._id));
     handleClose();
@@ -126,21 +157,27 @@ const Lesson = ({ lesson, id }) => {
                 onChange={handleChange}
                 name="description"
               />
-              <div className="add-photo-container">
-                <img
-                  src={OpenBook}
-                  className="add-photo"
-                  alt="open book"
-                  style={{ backgroundColor: courses[actualCourse].color }}
-                />
-                <p
-                  className="add-photo-text"
-                  style={{ backgroundColor: courses[actualCourse].color }}
-                >
-                  Dodaj zdjęcie
-                </p>
+              {/* <input
+                type="file"
+                id="image"
+                name="image"
+                onChange={changeImage}
+              /> */}
+              <div className="images-container">
+                {images.map((image, id) => {
+                  return (
+                    <img
+                      src={image.default}
+                      alt={image.default}
+                      key={id}
+                      style={{ width: "25%" }}
+                      onClick={chooseImage}
+                      id="image"
+                      name="image"
+                    />
+                  );
+                })}
               </div>
-
               <div className="modal-button-container">
                 <Button
                   type="submit"
@@ -157,10 +194,11 @@ const Lesson = ({ lesson, id }) => {
         </h2>
         <img
           style={{ width: "70%", marginLeft: "15%" }}
-          src={OpenBook}
+          src={lesson.image}
           alt={lesson.name}
         />
-        <h3>{lesson.description}</h3>
+
+        <h3 className="course-h3">{lesson.description}</h3>
       </div>
     </>
   );
