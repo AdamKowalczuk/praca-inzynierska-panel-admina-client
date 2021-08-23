@@ -13,18 +13,17 @@ import {
   updateQuiz,
 } from "../../../actions/quiz";
 
-const Quiz = ({ quiz, id, key }) => {
+const Quiz = ({ quiz, id }) => {
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.courses);
   const actualCourse = useSelector((state) => state.actualCourse);
   const actualChapter = useSelector((state) => state.actualChapter);
-  console.log(quiz._id);
   const courseId = courses[actualCourse]._id;
   const chapterId = courses[actualCourse].chapters[actualChapter]._id;
 
   const initialState = {
     question: quiz.question,
-    answers: [],
+    answers: quiz.answers,
     answer1: quiz.answers[0],
     answer2: quiz.answers[1],
     answer3: quiz.answers[2],
@@ -53,13 +52,13 @@ const Quiz = ({ quiz, id, key }) => {
     console.log("Quiz Form:", form);
     form.answers = [];
     e.preventDefault();
-    if (form.answer1 !== undefined || form.answer1 === "")
+    if (form.answer1 !== undefined && form.answer1 !== "")
       form.answers.push(form.answer1);
-    if (form.answer2 !== undefined || form.answer1 === "")
+    if (form.answer2 !== undefined && form.answer2 !== "")
       form.answers.push(form.answer2);
-    if (form.answer3 !== undefined || form.answer1 === "")
+    if (form.answer3 !== undefined && form.answer3 !== "")
       form.answers.push(form.answer3);
-    if (form.answer4 !== undefined || form.answer1 === "")
+    if (form.answer4 !== undefined && form.answer4 !== "")
       form.answers.push(form.answer4);
     dispatch(updateQuiz(form, courseId, chapterId, form._id));
     handleClose();

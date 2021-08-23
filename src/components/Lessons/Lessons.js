@@ -48,8 +48,6 @@ const Lessons = () => {
   //   setForm({ ...form, [e.target.name]: image });
   // };
   const chooseImage = (e) => {
-    console.log(e.target.src);
-    console.log(e);
     let image = e.target.src;
     let newImage = "";
     for (var i = 21; i < image.length; i++) {
@@ -109,14 +107,7 @@ const Lessons = () => {
               <h3>Opis lekcji</h3>
             </label>
             <textarea type="text" onChange={handleChange} name="description" />
-            {/* <input
-              type="file"
-              id="image"
-              name="image"
-              // value={form.image}
-              // required
-              // onChange={changeImage}
-            /> */}
+
             <h3>Wybierz zdjęcie</h3>
             <div className="images-container">
               {images.map((image, id) => {
@@ -156,7 +147,6 @@ const Lessons = () => {
               <img className="add-image" src={Plus} alt="plus" />
             </div>
           </div>
-          {/* <img src={newImage} alt="" /> */}
         </div>
       </div>
     </>

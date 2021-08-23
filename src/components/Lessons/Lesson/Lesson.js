@@ -65,8 +65,6 @@ const Lesson = ({ lesson, id }) => {
   //   setForm({ ...form, [e.target.name]: image });
   // };
   const chooseImage = (e) => {
-    console.log(e.target.src);
-    console.log(e);
     let image = e.target.src;
     let newImage = "";
     for (var i = 21; i < image.length; i++) {

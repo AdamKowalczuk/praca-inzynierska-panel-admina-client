@@ -15,7 +15,7 @@ import {
 import "../../../modal.scss";
 import { useDispatch } from "react-redux";
 import Delete from "../../../images/delete.svg";
-
+import icons from "./icons";
 const Course = ({ course, id }) => {
   const dispatch = useDispatch();
   const initialState = {
@@ -23,6 +23,9 @@ const Course = ({ course, id }) => {
     description: course.description,
     isFinished: course.isFinished,
     chapters: course.chapters,
+    color: course.color,
+    _id: course._id,
+    icon: course.icon,
   };
   const [form, setForm] = useState(initialState);
   const chapters = course.chapters;
@@ -35,6 +38,14 @@ const Course = ({ course, id }) => {
   }
 
   const [open, setOpen] = React.useState(false);
+  const chooseIcon = (e) => {
+    let icon = e.target.src;
+    let newIcon = "";
+    for (var i = 21; i < icon.length; i++) {
+      newIcon += icon.charAt(i);
+    }
+    setForm({ ...form, [e.target.name]: newIcon });
+  };
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
   const handleOpen = () => {
@@ -115,6 +126,31 @@ const Course = ({ course, id }) => {
                 value={form.description}
                 onChange={handleChange}
               />
+              <label htmlFor="color">
+                <h3>Wybierz kolor</h3>
+              </label>
+              <input
+                type="color"
+                id="color"
+                onChange={handleChange}
+                name="color"
+                // value="#ff0000"
+              />
+              <div className="images-container">
+                {icons.map((icon, id) => {
+                  return (
+                    <img
+                      src={icon.default}
+                      alt={icon.default}
+                      key={id}
+                      style={{ width: "25%" }}
+                      onClick={chooseIcon}
+                      id="icon"
+                      name="icon"
+                    />
+                  );
+                })}
+              </div>
               <div className="modal-button-container">
                 <Button
                   type="submit"
@@ -134,13 +170,17 @@ const Course = ({ course, id }) => {
         >
           {course.name}
         </h2>
+        <img
+          style={{ width: "70%", marginLeft: "15%" }}
+          src={course.icon}
+          alt={course.icon}
+        />
         <h3 className="course-h3">{course.description}</h3>
         <div className="chapters-lessons-container">
           <Link className="link" to="/admin/rozdziały">
             <h4
               style={{
                 cursor: "pointer",
-                // color: course.color,
                 backgroundColor: course.color,
               }}
               onClick={() => dispatch(changeActualCourse(id))}

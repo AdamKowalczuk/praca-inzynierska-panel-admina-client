@@ -10,9 +10,8 @@ import {
   changeActualChapter,
   updateChapter,
   deleteChapter,
-  // deleteChapter,
-  // setCourseName,
 } from "../../../actions/courses";
+import icons from "./icons";
 import "../../../modal.scss";
 import Delete from "../../../images/delete.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,7 +37,10 @@ const Chapter = ({ chapter, id }) => {
     description: chapter.description,
     isFinished: chapter.isFinished,
     lessons: chapter.lessons,
+    icon: chapter.icon,
     _id: GenerateObjectId(),
+    quiz: chapter.quiz,
+    isQuizCompleted: chapter.isQuizCompleted,
     actualChapter: id,
   };
   const [open, setOpen] = React.useState(false);
@@ -46,6 +48,14 @@ const Chapter = ({ chapter, id }) => {
   const handleOpen = () => {
     dispatch(changeActualChapter(id));
     setOpen(true);
+  };
+  const chooseIcon = (e) => {
+    let icon = e.target.src;
+    let newIcon = "";
+    for (var i = 21; i < icon.length; i++) {
+      newIcon += icon.charAt(i);
+    }
+    setForm({ ...form, [e.target.name]: newIcon });
   };
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -55,7 +65,6 @@ const Chapter = ({ chapter, id }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("ChapterFORM", form);
     dispatch(updateChapter(form, courseId, form._id));
     handleClose();
   };
@@ -119,6 +128,21 @@ const Chapter = ({ chapter, id }) => {
                 onChange={handleChange}
                 name="description"
               />
+              <div className="images-container">
+                {icons.map((icon, id) => {
+                  return (
+                    <img
+                      src={icon.default}
+                      alt={icon.default}
+                      key={id}
+                      style={{ width: "25%" }}
+                      onClick={chooseIcon}
+                      id="icon"
+                      name="icon"
+                    />
+                  );
+                })}
+              </div>
               <div className="modal-button-container">
                 <Button
                   type="submit"
@@ -133,6 +157,11 @@ const Chapter = ({ chapter, id }) => {
         <h2 className="futura" style={{ color: courses[actualCourse].color }}>
           {chapter.name}
         </h2>
+        <img
+          style={{ width: "70%", marginLeft: "15%" }}
+          src={chapter.icon}
+          alt={chapter.icon}
+        />
         <h3 className="course-h3">{chapter.description}</h3>
         <div className="chapters-lessons-container">
           <Link className="link" to="/admin/lekcje">
@@ -145,7 +174,6 @@ const Chapter = ({ chapter, id }) => {
             >
               <img src={Lesson} alt="lesson" />
               <p className="italic ">Lekcje</p>
-              {/* <p>{chapter.lessons.length}</p> */}
             </h4>
           </Link>
           <Link className="link" to="/admin/quizy">
@@ -158,7 +186,6 @@ const Chapter = ({ chapter, id }) => {
             >
               <img src={Quiz} alt="lesson" />
               <p className="italic ">Quizy</p>
-              {/* <p>{chapter.lessons.length}</p> */}
             </h4>
           </Link>
         </div>
