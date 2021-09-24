@@ -9,10 +9,9 @@ import Button from "../Button/Button";
 import Modal from "@material-ui/core/Modal";
 import CloseIcon from "@material-ui/icons/Close";
 import { createChapter } from "../../actions/courses";
-import icons from "./Chapter/icons";
+import Icon from "./Chapter/Icon";
 const Chapters = () => {
   const dispatch = useDispatch();
-
   const courses = useSelector((state) => state.courses);
   const actualCourse = useSelector((state) => state.actualCourse);
   const id = courses[actualCourse]._id;
@@ -36,6 +35,7 @@ const Chapters = () => {
     icon: "",
     quiz: [],
     isQuizCompleted: false,
+    isExerciseCompleted: false,
     _id: GenerateObjectId(),
   };
   const [form, setForm] = useState(initialState);
@@ -59,7 +59,6 @@ const Chapters = () => {
     setForm({ ...form, [e.target.name]: newIcon });
   };
   const handleSubmit = (e) => {
-    console.log(form);
     setForm({ ...form, _id: GenerateObjectId() });
     e.preventDefault();
     dispatch(createChapter(form, id));
@@ -100,19 +99,7 @@ const Chapters = () => {
             <textarea type="text" onChange={handleChange} name="description" />
             <h3>Wybierz zdjęcie</h3>
             <div className="icons-container">
-              {icons.map((icon, id) => {
-                return (
-                  <img
-                    src={icon.default}
-                    alt={icon.default}
-                    key={id}
-                    style={{ width: "25%" }}
-                    onClick={chooseIcon}
-                    id="icon"
-                    name="icon"
-                  />
-                );
-              })}
+              <Icon chooseIcon={(e) => chooseIcon(e)} />
             </div>
             <div className="modal-button-container">
               <Button

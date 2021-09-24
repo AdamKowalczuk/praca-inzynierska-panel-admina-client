@@ -9,8 +9,9 @@ import Plus from "../../images/plus.svg";
 import Button from "../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
 import OpenBook from "../../images/open-book.svg";
+import Image from "./Lesson/Image";
 import { createLesson } from "../../actions/courses";
-import images from "./Lesson/images";
+// import images from "./Lesson/images";
 const Lessons = () => {
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.courses);
@@ -21,7 +22,6 @@ const Lessons = () => {
   const lessons = useSelector(
     (state) => state.courses[actualCourse].chapters[actualChapter].lessons
   );
-
   function GenerateObjectId() {
     var ObjectId = (
       m = Math,
@@ -110,7 +110,8 @@ const Lessons = () => {
 
             <h3>Wybierz zdjęcie</h3>
             <div className="images-container">
-              {images.map((image, id) => {
+              <Image chooseImage={(e) => chooseImage(e)} />
+              {/* {images.map((image, id) => {
                 return (
                   <img
                     src={image.default}
@@ -122,7 +123,7 @@ const Lessons = () => {
                     name="image"
                   />
                 );
-              })}
+              })} */}
             </div>
             <div className="modal-button-container">
               <Button

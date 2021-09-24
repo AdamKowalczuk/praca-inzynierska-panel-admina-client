@@ -24,12 +24,32 @@ const Courses = ({ setCurrentId }) => {
 
     return ObjectId();
   }
+  function hexToRGB20(h) {
+    let r = 0,
+      g = 0,
+      b = 0;
+    r = "0x" + h[1] + h[2];
+    g = "0x" + h[3] + h[4];
+    b = "0x" + h[5] + h[6];
+    return "rgb(" + +r + "," + +g + "," + +b + ",20%)";
+  }
+  function hexToRGB40(h) {
+    let r = 0,
+      g = 0,
+      b = 0;
+    r = "0x" + h[1] + h[2];
+    g = "0x" + h[3] + h[4];
+    b = "0x" + h[5] + h[6];
+    return "rgb(" + +r + "," + +g + "," + +b + ",40%)";
+  }
   const initialState = {
     name: "",
     description: "",
     isFinished: "false",
     chapters: [],
-    color: "",
+    primaryColor: "",
+    secondaryColor: "",
+    thirdColor: "",
     _id: GenerateObjectId(),
     icon: "",
   };
@@ -37,7 +57,6 @@ const Courses = ({ setCurrentId }) => {
   const [open, setOpen] = React.useState(false);
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -55,6 +74,8 @@ const Courses = ({ setCurrentId }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    form.secondaryColor = hexToRGB20(form.primaryColor);
+    form.thirdColor = hexToRGB40(form.primaryColor);
     dispatch(createCourse(form));
     handleClose();
   };
@@ -84,16 +105,16 @@ const Courses = ({ setCurrentId }) => {
             </label>
 
             <textarea type="text" onChange={handleChange} name="description" />
-            <label htmlFor="color">
-              <h3>Wybierz kolor</h3>
+            <label htmlFor="primaryColor">
+              <h3>Wybierz kolor podstawowy</h3>
             </label>
             <input
-              type="color"
-              id="color"
+              type="text"
+              id="primaryColor"
               onChange={handleChange}
-              name="color"
-              // value="#ff0000"
+              name="primaryColor"
             />
+
             <h3>Wybierz zdjęcie</h3>
             <div className="icons-container">
               {icons.map((icon, id) => {
@@ -102,7 +123,10 @@ const Courses = ({ setCurrentId }) => {
                     src={icon.default}
                     alt={icon.default}
                     key={id}
-                    style={{ width: "25%" }}
+                    style={{
+                      width: "25%",
+                      backgroundColor: "#000",
+                    }}
                     onClick={chooseIcon}
                     id="icon"
                     name="icon"

@@ -23,12 +23,28 @@ const Course = ({ course, id }) => {
     description: course.description,
     isFinished: course.isFinished,
     chapters: course.chapters,
-    color: course.color,
+    primaryColor: course.primaryColor,
+    secondaryColor: course.secondaryColor,
+    thirdColor: course.thirdColor,
     _id: course._id,
     icon: course.icon,
   };
   const [form, setForm] = useState(initialState);
   const chapters = course.chapters;
+
+  function importAll(r) {
+    let images = {};
+    r.keys().map((item, index) => {
+      // images.push(r(item));
+      images[item.replace("./", "")] = r(item);
+    });
+    return images;
+  }
+
+  const images = importAll(
+    require.context("./icons", false, /\.(png|jpe?g|svg)$/)
+  );
+
   function sumLessons() {
     let sum = 0;
     chapters.forEach((chapter) => {
@@ -41,11 +57,34 @@ const Course = ({ course, id }) => {
   const chooseIcon = (e) => {
     let icon = e.target.src;
     let newIcon = "";
-    for (var i = 21; i < icon.length; i++) {
+    for (var i = 35; i < icon.length; i++) {
+      if (icon.charAt(i) === ".") {
+        break;
+      }
       newIcon += icon.charAt(i);
     }
+    newIcon += ".svg";
     setForm({ ...form, [e.target.name]: newIcon });
   };
+
+  function hexToRGB20(h) {
+    let r = 0,
+      g = 0,
+      b = 0;
+    r = "0x" + h[1] + h[2];
+    g = "0x" + h[3] + h[4];
+    b = "0x" + h[5] + h[6];
+    return "rgb(" + +r + "," + +g + "," + +b + ",20%)";
+  }
+  function hexToRGB40(h) {
+    let r = 0,
+      g = 0,
+      b = 0;
+    r = "0x" + h[1] + h[2];
+    g = "0x" + h[3] + h[4];
+    b = "0x" + h[5] + h[6];
+    return "rgb(" + +r + "," + +g + "," + +b + ",40%)";
+  }
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
   const handleOpen = () => {
@@ -57,6 +96,8 @@ const Course = ({ course, id }) => {
   };
 
   const handleSubmit = (e) => {
+    form.secondaryColor = hexToRGB20(form.primaryColor);
+    form.thirdColor = hexToRGB40(form.primaryColor);
     e.preventDefault();
     dispatch(updateCourse(form, course._id));
     handleClose();
@@ -70,18 +111,12 @@ const Course = ({ course, id }) => {
           alt="pen"
           className="edit-icon"
           onClick={() => handleOpen()}
-          style={{
-            backgroundColor: course.color,
-          }}
         />
         <img
           src={Delete}
           alt="delete"
           className="modal-delete-icon"
           onClick={() => dispatch(deleteCourse(course._id))}
-          style={{
-            backgroundColor: course.color,
-          }}
         />
 
         <Modal
@@ -126,24 +161,28 @@ const Course = ({ course, id }) => {
                 value={form.description}
                 onChange={handleChange}
               />
-              <label htmlFor="color">
-                <h3>Wybierz kolor</h3>
+              <label htmlFor="primaryColor">
+                <h3>Wybierz kolor podstawowy</h3>
               </label>
               <input
-                type="color"
-                id="color"
+                type="text"
+                id="primaryColor"
                 onChange={handleChange}
-                name="color"
-                // value="#ff0000"
+                name="primaryColor"
               />
+
               <div className="images-container">
                 {icons.map((icon, id) => {
+                  console.log(icon.default);
                   return (
                     <img
                       src={icon.default}
                       alt={icon.default}
                       key={id}
-                      style={{ width: "25%" }}
+                      style={{
+                        width: "25%",
+                        backgroundColor: "#000",
+                      }}
                       onClick={chooseIcon}
                       id="icon"
                       name="icon"
@@ -162,17 +201,11 @@ const Course = ({ course, id }) => {
             </form>
           </div>
         </Modal>
-        <h2
-          className="futura "
-          style={{
-            color: course.color,
-          }}
-        >
-          {course.name}
-        </h2>
+        <h2 className="futura ">{course.name}</h2>
         <img
-          style={{ width: "70%", marginLeft: "15%" }}
-          src={course.icon}
+          style={{ width: "40%", marginLeft: "30%" }}
+          // src={course.icon}
+          src={images[course.icon].default}
           alt={course.icon}
         />
         <h3 className="course-h3">{course.description}</h3>
@@ -181,7 +214,7 @@ const Course = ({ course, id }) => {
             <h4
               style={{
                 cursor: "pointer",
-                backgroundColor: course.color,
+                backgroundColor: course.primaryColor,
               }}
               onClick={() => dispatch(changeActualCourse(id))}
             >
@@ -192,7 +225,7 @@ const Course = ({ course, id }) => {
           </Link>
           <h4
             style={{
-              backgroundColor: course.color,
+              backgroundColor: course.primaryColor,
             }}
           >
             <img src={Lesson} alt="lesson" />

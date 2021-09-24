@@ -11,11 +11,58 @@ import {
   updateChapter,
   deleteChapter,
 } from "../../../actions/courses";
-import icons from "./icons";
+
 import "../../../modal.scss";
 import Delete from "../../../images/delete.svg";
 import { useDispatch, useSelector } from "react-redux";
 import Quiz from "../../../images/quiz.svg";
+
+import icons2 from "./icons";
+
+function importAll(r) {
+  let images = [];
+  r.keys().map((item, index) => {
+    images.push(r(item));
+  });
+  return images;
+}
+
+const images = importAll(
+  require.context("./icons", false, /\.(png|jpe?g|svg)$/)
+);
+function importAll2(r) {
+  let images = {};
+  r.keys().map((item, index) => {
+    images[item.replace("./", "")] = r(item);
+  });
+  return images;
+}
+
+const images2 = importAll2(
+  require.context("./icons", false, /\.(png|jpe?g|svg)$/)
+);
+
+const Icon = (props) => {
+  console.log(props.chooseIcon);
+  return (
+    <>
+      {images.map((image, id) => {
+        return (
+          <img
+            src={image.default}
+            alt={image.default}
+            key={id}
+            style={{ width: "50%" }}
+            onClick={props.chooseIcon}
+            id="icon"
+            name="icon"
+          />
+        );
+      })}
+    </>
+  );
+};
+
 const Chapter = ({ chapter, id }) => {
   const dispatch = useDispatch();
   function GenerateObjectId() {
@@ -41,6 +88,7 @@ const Chapter = ({ chapter, id }) => {
     _id: GenerateObjectId(),
     quiz: chapter.quiz,
     isQuizCompleted: chapter.isQuizCompleted,
+    isExerciseCompleted: chapter.isExerciseCompleted,
     actualChapter: id,
   };
   const [open, setOpen] = React.useState(false);
@@ -51,11 +99,17 @@ const Chapter = ({ chapter, id }) => {
   };
   const chooseIcon = (e) => {
     let icon = e.target.src;
+    console.log(icon);
     let newIcon = "";
-    for (var i = 21; i < icon.length; i++) {
+    for (var i = 35; i < icon.length; i++) {
+      if (icon.charAt(i) === ".") {
+        break;
+      }
       newIcon += icon.charAt(i);
     }
+    newIcon += ".svg";
     setForm({ ...form, [e.target.name]: newIcon });
+    console.log(newIcon);
   };
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -77,13 +131,11 @@ const Chapter = ({ chapter, id }) => {
           alt="pen"
           className="edit-icon"
           onClick={() => handleOpen()}
-          style={{ backgroundColor: courses[actualCourse].color }}
         />
         <img
           src={Delete}
           alt="delete"
           className="modal-delete-icon"
-          style={{ backgroundColor: courses[actualCourse].color }}
           onClick={() =>
             dispatch(
               deleteChapter(courseId, chapter._id, { actualChapter: id })
@@ -129,19 +181,7 @@ const Chapter = ({ chapter, id }) => {
                 name="description"
               />
               <div className="images-container">
-                {icons.map((icon, id) => {
-                  return (
-                    <img
-                      src={icon.default}
-                      alt={icon.default}
-                      key={id}
-                      style={{ width: "25%" }}
-                      onClick={chooseIcon}
-                      id="icon"
-                      name="icon"
-                    />
-                  );
-                })}
+                <Icon chooseIcon={(e) => chooseIcon(e)} />
               </div>
               <div className="modal-button-container">
                 <Button
@@ -159,7 +199,7 @@ const Chapter = ({ chapter, id }) => {
         </h2>
         <img
           style={{ width: "70%", marginLeft: "15%" }}
-          src={chapter.icon}
+          src={images2[chapter.icon].default}
           alt={chapter.icon}
         />
         <h3 className="course-h3">{chapter.description}</h3>

@@ -80,7 +80,7 @@ const Home = () => {
         </div>
         <div className="information-container2">
           <img src={DoneChecking} alt="done checking" />
-          <h1 style={{ color: "#ff4e40" }}>Liczba ukończonych</h1>
+          <h1>Liczba ukończonych</h1>
           <div className="acomplished-container">
             <div className="acomplished-box">
               <h2 className="acomplished-name">Kursów</h2>

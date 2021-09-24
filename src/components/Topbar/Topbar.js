@@ -6,6 +6,7 @@ import decode from "jwt-decode";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 
 import * as actionType from "../../constants/actionTypes";
+// import Logout from "../../icons/012-logout.svg";
 
 const Topbar = (props) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -37,6 +38,8 @@ const Topbar = (props) => {
       {user?.result ? (
         <div className="topbar">
           <h1 className="circular">{props.name}</h1>
+          {/* <img src={Logout} alt="logout" onClick={logout} /> */}
+          {/* <Logout onClick={logout} /> */}
           <MeetingRoomIcon onClick={logout} />
         </div>
       ) : null}

@@ -28,7 +28,7 @@ $yellow: #fee786;
   img {
     position: absolute;
     height: 80%;
-    right: -170px;
+    right: -260px;
     top: 10%;
   }
 
@@ -55,7 +55,7 @@ $yellow: #fee786;
         height: 50px;
         color: $green;
         border-radius: 10px;
-        background-color: hsl(161, 71%, 46%, 40%);
+        background-color: hsl(161, 71%, 46%, 20%);
       }
     }
   }
@@ -79,12 +79,13 @@ $yellow: #fee786;
   img {
     position: absolute;
     height: 70%;
-    left: -170px;
+    left: -260px;
     top: 20%;
   }
   h1 {
     text-align: center;
     padding: 20px;
+    color: $green;
   }
   .acomplished-container {
     display: flex;
@@ -109,13 +110,16 @@ $yellow: #fee786;
         // background-color: red;
       }
       .acomplished-number-1 {
-        background-color: $red;
+        color: $red;
+        background-color: hsl(4, 100%, 63%, 20%);
       }
       .acomplished-number-2 {
-        background-color: $yellow;
+        color: $yellow;
+        background-color: hsl(49, 98%, 76%, 20%);
       }
       .acomplished-number-3 {
-        background-color: $green;
+        color: $green;
+        background-color: hsl(161, 71%, 46%, 20%);
       }
     }
     .acomplished-box:nth-child(2) {

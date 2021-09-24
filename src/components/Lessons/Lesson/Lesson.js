@@ -9,9 +9,9 @@ import Button from "../../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
 import Pen from "../../../images/pen.svg";
 import OpenBook from "../../../images/open-book.svg";
-import Teaching from "./images/teaching.svg";
 // import images from "./images";
-import images from "./images";
+// import images from "./images";
+import Image from "./Image";
 
 import "../../../modal.scss";
 import {
@@ -60,16 +60,15 @@ const Lesson = ({ lesson, id }) => {
   const handleOpen = () => {
     setOpen(true);
   };
-  // const changeImage = (e) => {
-  //   let image = document.getElementById("image").files[0].name;
-  //   setForm({ ...form, [e.target.name]: image });
-  // };
   const chooseImage = (e) => {
+    // console.log(e);
     let image = e.target.src;
+    console.log(image);
     let newImage = "";
     for (var i = 21; i < image.length; i++) {
       newImage += image.charAt(i);
     }
+    console.log(newImage);
     setForm({ ...form, [e.target.name]: newImage });
   };
   const handleChange = (e) =>
@@ -94,7 +93,6 @@ const Lesson = ({ lesson, id }) => {
           src={Pen}
           alt="pen"
           className="edit-icon"
-          style={{ backgroundColor: courses[actualCourse].color }}
           onClick={() => {
             dispatch(changeActualLesson(id));
             handleOpen();
@@ -104,7 +102,6 @@ const Lesson = ({ lesson, id }) => {
           src={Delete}
           alt="delete"
           className="modal-delete-icon"
-          style={{ backgroundColor: courses[actualCourse].color }}
           onClick={() => {
             dispatch(changeActualLesson(id));
             dispatch(
@@ -155,26 +152,21 @@ const Lesson = ({ lesson, id }) => {
                 onChange={handleChange}
                 name="description"
               />
-              {/* <input
-                type="file"
-                id="image"
-                name="image"
-                onChange={changeImage}
-              /> */}
               <div className="images-container">
-                {images.map((image, id) => {
+                <Image chooseImage={(e) => chooseImage(e)} />
+                {/* {images.map((image, id) => {
                   return (
                     <img
                       src={image.default}
                       alt={image.default}
                       key={id}
-                      style={{ width: "25%" }}
+                      style={{ width: "50%" }}
                       onClick={chooseImage}
                       id="image"
                       name="image"
                     />
                   );
-                })}
+                })} */}
               </div>
               <div className="modal-button-container">
                 <Button

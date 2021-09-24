@@ -38,9 +38,10 @@ td {
   }
   svg {
     font-size: 30px;
-    background-color: $red;
-    padding: 2px;
+    background-color: hsl(4, 100%, 63%, 0.2);
+    padding: 4px;
     border-radius: 5px;
+    color: $red;
   }
   svg:hover {
     color: $red;

@@ -49,7 +49,6 @@ const Quiz = ({ quiz, id }) => {
   };
 
   const handleSubmit = (e) => {
-    console.log("Quiz Form:", form);
     form.answers = [];
     e.preventDefault();
     if (form.answer1 !== undefined && form.answer1 !== "")
@@ -74,7 +73,6 @@ const Quiz = ({ quiz, id }) => {
             dispatch(changeActualQuiz(id));
             handleOpen();
           }}
-          style={{ backgroundColor: courses[actualCourse].color }}
         />
         <img
           src={Delete}
@@ -91,7 +89,6 @@ const Quiz = ({ quiz, id }) => {
               )
             );
           }}
-          style={{ backgroundColor: courses[actualCourse].color }}
         />
         <Modal
           open={open}

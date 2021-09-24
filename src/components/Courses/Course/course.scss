@@ -44,6 +44,7 @@ $red: #ff4e40;
       padding: 15px;
       border-radius: 0px 10px 0px 10px;
       border-bottom-left-radius: 30%;
+      background-color: hsl(161, 71%, 46%, 0.2);
     }
     .edit-icon:hover {
       box-shadow: hsl(0, 0%, 100%, 0.8) 0px 0px 30px;
@@ -60,6 +61,7 @@ $red: #ff4e40;
       padding: 15px;
       border-radius: 10px 0px 10px 0px;
       border-bottom-right-radius: 30%;
+      background-color: hsl(4, 100%, 63%, 0.2);
     }
     .modal-delete-icon:hover {
       box-shadow: hsl(0, 0%, 100%, 0.8) 0px 0px 30px;
@@ -70,7 +72,10 @@ $red: #ff4e40;
       display: flex;
       justify-content: center;
       padding-bottom: 20px;
-      color: $red;
+      margin: 0 15%;
+      text-align: center;
+      width: 70%;
+      color: $white;
     }
     .course-h3 {
       margin-top: 20px;
