@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./chapter.scss";
+// import "./chapter.scss";
 import { Link } from "react-router-dom";
 import Modal from "@material-ui/core/Modal";
 import Button from "../../Button/Button";
@@ -16,8 +16,9 @@ import "../../../modal.scss";
 import Delete from "../../../images/delete.svg";
 import { useDispatch, useSelector } from "react-redux";
 import Quiz from "../../../images/quiz.svg";
+import { jssPreset } from "@material-ui/styles";
 
-import icons2 from "./icons";
+// import icons2 from "./icons/stare";
 
 function importAll(r) {
   let images = [];
@@ -27,9 +28,6 @@ function importAll(r) {
   return images;
 }
 
-const images = importAll(
-  require.context("./icons", false, /\.(png|jpe?g|svg)$/)
-);
 function importAll2(r) {
   let images = {};
   r.keys().map((item, index) => {
@@ -37,13 +35,10 @@ function importAll2(r) {
   });
   return images;
 }
-
-const images2 = importAll2(
-  require.context("./icons", false, /\.(png|jpe?g|svg)$/)
-);
+let images;
+let images2;
 
 const Icon = (props) => {
-  console.log(props.chooseIcon);
   return (
     <>
       {images.map((image, id) => {
@@ -111,6 +106,46 @@ const Chapter = ({ chapter, id }) => {
     setForm({ ...form, [e.target.name]: newIcon });
     console.log(newIcon);
   };
+  switch (actualCourse) {
+    case 0:
+      images = importAll(
+        require.context("./icons/html", false, /\.(png|jpe?g|svg)$/)
+      );
+      break;
+    case 1:
+      images = importAll(
+        require.context("./icons/css", false, /\.(png|jpe?g|svg)$/)
+      );
+      break;
+    case 2:
+      images = importAll(
+        require.context("./icons/javascript", false, /\.(png|jpe?g|svg)$/)
+      );
+      break;
+    default:
+      images = "";
+      break;
+  }
+  switch (actualCourse) {
+    case 0:
+      images2 = importAll2(
+        require.context("./icons/html", false, /\.(png|jpe?g|svg)$/)
+      );
+      break;
+    case 1:
+      images2 = importAll2(
+        require.context("./icons/css", false, /\.(png|jpe?g|svg)$/)
+      );
+      break;
+    case 2:
+      images2 = importAll2(
+        require.context("./icons/javascript", false, /\.(png|jpe?g|svg)$/)
+      );
+      break;
+    default:
+      images2 = "";
+      break;
+  }
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
   const handleClose = () => {
@@ -171,7 +206,7 @@ const Chapter = ({ chapter, id }) => {
                 name="name"
               />
 
-              <label htmlFor="description">
+              {/* <label htmlFor="description">
                 <h3>Opis rozdziału</h3>
               </label>
               <textarea
@@ -179,7 +214,8 @@ const Chapter = ({ chapter, id }) => {
                 value={form.description}
                 onChange={handleChange}
                 name="description"
-              />
+              /> */}
+              <h3 style={{ marginBottom: "10px" }}>Wybierz zdjęcie:</h3>
               <div className="images-container">
                 <Icon chooseIcon={(e) => chooseIcon(e)} />
               </div>
@@ -198,12 +234,15 @@ const Chapter = ({ chapter, id }) => {
           {chapter.name}
         </h2>
         <img
-          style={{ width: "70%", marginLeft: "15%" }}
+          style={{ width: "50%", marginLeft: "25%" }}
           src={images2[chapter.icon].default}
           alt={chapter.icon}
         />
-        <h3 className="course-h3">{chapter.description}</h3>
-        <div className="chapters-lessons-container">
+        {/* <h3 className="course-h3">{chapter.description}</h3> */}
+        <div
+          className="chapters-lessons-container"
+          style={{ marginTop: "50px" }}
+        >
           <Link className="link" to="/admin/lekcje">
             <h4
               style={{

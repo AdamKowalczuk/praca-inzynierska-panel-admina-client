@@ -9,8 +9,41 @@ import Plus from "../../images/plus.svg";
 import Button from "../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
 import OpenBook from "../../images/open-book.svg";
-import Image from "./Lesson/Image";
+// import Image from "./Lesson/Image";
 import { createLesson } from "../../actions/courses";
+
+function importAll(r) {
+  let images = [];
+  r.keys().map((item, index) => {
+    images.push(r(item));
+  });
+  return images;
+}
+let images;
+
+const Image = (props) => {
+  return (
+    <>
+      {images.map((image, id) => {
+        return (
+          <>
+            <h3>{image.default}</h3>
+            <img
+              className="lesson-image"
+              src={image.default}
+              alt={image.default}
+              key={id}
+              style={{ width: "50%" }}
+              onClick={props.chooseImage}
+              name="image"
+            />
+          </>
+        );
+      })}
+    </>
+  );
+};
+
 // import images from "./Lesson/images";
 const Lessons = () => {
   const dispatch = useDispatch();
@@ -43,18 +76,47 @@ const Lessons = () => {
   };
   const [form, setForm] = useState(initialState);
   const [open, setOpen] = React.useState(false);
-  // const changeImage = (e) => {
-  //   let image = document.getElementById("image").files[0].name;
-  //   setForm({ ...form, [e.target.name]: image });
-  // };
   const chooseImage = (e) => {
     let image = e.target.src;
     let newImage = "";
-    for (var i = 21; i < image.length; i++) {
+    for (var i = 35; i < image.length; i++) {
+      if (image.charAt(i) === ".") {
+        break;
+      }
       newImage += image.charAt(i);
+    }
+    if (image[image.length - 1] === "p") {
+      newImage += ".bmp";
+    } else {
+      newImage += ".svg";
     }
     setForm({ ...form, [e.target.name]: newImage });
   };
+
+  switch (actualCourse) {
+    case 0:
+      images = importAll(
+        require.context("./Lesson/images/html", false, /\.(png|jpe?g|bmp|svg)$/)
+      );
+      break;
+    case 1:
+      images = importAll(
+        require.context("./Lesson/images/css", false, /\.(png|jpe?g|bmp|svg)$/)
+      );
+      break;
+    case 2:
+      images = importAll(
+        require.context(
+          "./Lesson/images/javascript",
+          false,
+          /\.(png|jpe?g|bmp|svg)$/
+        )
+      );
+      break;
+    default:
+      images = "";
+      break;
+  }
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -96,34 +158,18 @@ const Lessons = () => {
               onClick={() => handleClose()}
             />
           </div>
-
           <form action="post" onSubmit={handleSubmit}>
             <label htmlFor="name">
               <h3>Nazwa lekcji</h3>
             </label>
             <input type="text" onChange={handleChange} name="name" />
-
             <label htmlFor="description">
               <h3>Opis lekcji</h3>
             </label>
             <textarea type="text" onChange={handleChange} name="description" />
-
             <h3>Wybierz zdjęcie</h3>
             <div className="images-container">
               <Image chooseImage={(e) => chooseImage(e)} />
-              {/* {images.map((image, id) => {
-                return (
-                  <img
-                    src={image.default}
-                    alt={image.default}
-                    key={id}
-                    style={{ width: "25%" }}
-                    onClick={chooseImage}
-                    id="image"
-                    name="image"
-                  />
-                );
-              })} */}
             </div>
             <div className="modal-button-container">
               <Button

@@ -214,7 +214,7 @@ const Course = ({ course, id }) => {
             <h4
               style={{
                 cursor: "pointer",
-                backgroundColor: course.primaryColor,
+                // backgroundColor: course.primaryColor,
               }}
               onClick={() => dispatch(changeActualCourse(id))}
             >
@@ -224,9 +224,9 @@ const Course = ({ course, id }) => {
             </h4>
           </Link>
           <h4
-            style={{
-              backgroundColor: course.primaryColor,
-            }}
+          // style={{
+          //   backgroundColor: course.primaryColor,
+          // }}
           >
             <img src={Lesson} alt="lesson" />
             <p>{sumLessons()}</p>

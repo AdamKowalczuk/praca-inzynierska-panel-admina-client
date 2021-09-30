@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./chapters.scss";
+// import "./chapters.scss";
 import { useSelector, useDispatch } from "react-redux";
 import Chapter from "./Chapter/Chapter.js";
 import Topbar from "../Topbar/Topbar";
@@ -9,7 +9,37 @@ import Button from "../Button/Button";
 import Modal from "@material-ui/core/Modal";
 import CloseIcon from "@material-ui/icons/Close";
 import { createChapter } from "../../actions/courses";
-import Icon from "./Chapter/Icon";
+// import Icon from "./Chapter/Icon";
+
+function importAll(r) {
+  let images = [];
+  r.keys().map((item, index) => {
+    images.push(r(item));
+  });
+  return images;
+}
+let images = "";
+
+const Icon = (props) => {
+  return (
+    <>
+      {images.map((image, id) => {
+        return (
+          <img
+            src={image.default}
+            alt={image.default}
+            key={id}
+            style={{ width: "50%" }}
+            onClick={props.chooseIcon}
+            id="icon"
+            name="icon"
+          />
+        );
+      })}
+    </>
+  );
+};
+
 const Chapters = () => {
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.courses);
@@ -40,6 +70,32 @@ const Chapters = () => {
   };
   const [form, setForm] = useState(initialState);
   const [open, setOpen] = React.useState(false);
+
+  switch (actualCourse) {
+    case 0:
+      images = importAll(
+        require.context("./Chapter/icons/html", false, /\.(png|jpe?g|svg)$/)
+      );
+      break;
+    case 1:
+      images = importAll(
+        require.context("./Chapter/icons/css", false, /\.(png|jpe?g|svg)$/)
+      );
+      break;
+    case 2:
+      images = importAll(
+        require.context(
+          "./Chapter/icons/javascript",
+          false,
+          /\.(png|jpe?g|svg)$/
+        )
+      );
+      break;
+    default:
+      images = "";
+      break;
+  }
+
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -93,11 +149,11 @@ const Chapters = () => {
             </label>
             <input type="text" onChange={handleChange} name="name" />
 
-            <label htmlFor="description">
+            {/* <label htmlFor="description">
               <h3>Opis rozdziału</h3>
             </label>
-            <textarea type="text" onChange={handleChange} name="description" />
-            <h3>Wybierz zdjęcie</h3>
+            <textarea type="text" onChange={handleChange} name="description" /> */}
+            <h3 style={{ marginBottom: "10px" }}>Wybierz zdjęcie:</h3>
             <div className="icons-container">
               <Icon chooseIcon={(e) => chooseIcon(e)} />
             </div>
