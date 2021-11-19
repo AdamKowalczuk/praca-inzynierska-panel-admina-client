@@ -142,6 +142,15 @@ const Courses = ({ setCurrentId }) => {
               ></Button>
             </div>
           </form>
+          <div className="modal-bottom">
+            <div className="modal-button-container">
+              <Button
+                type="submit"
+                text="Zatwierdź zmiany"
+                class="btn modal-button"
+              ></Button>
+            </div>
+          </div>
         </div>
       </Modal>
       <div className="home-container">

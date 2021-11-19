@@ -155,15 +155,24 @@ const Chapters = () => {
             <div className="icons-container">
               <Icon chooseIcon={(e) => chooseIcon(e)} />
             </div>
-            <div className="modal-button-container">
+            {/* <div className="modal-button-container">
               <Button
                 type="submit"
                 color={courses[actualCourse].color}
                 text="Dodaj kurs"
                 class="btn modal-button"
               ></Button>
-            </div>
+            </div> */}
           </form>
+          <div className="modal-bottom">
+            <div className="modal-button-container">
+              <Button
+                type="submit"
+                text="Zatwierdź zmiany"
+                class="btn modal-button"
+              ></Button>
+            </div>
+          </div>
         </div>
       </Modal>
       <div className="home-container">

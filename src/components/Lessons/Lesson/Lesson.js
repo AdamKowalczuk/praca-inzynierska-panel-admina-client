@@ -239,14 +239,10 @@ const Lesson = ({ lesson, id }) => {
                 <Image chooseImage={(e) => chooseImage(e)} />
               </div>
             </form>
-            <div
-              className="modal-bottom"
-              style={{ backgroundColor: courses[actualCourse].color }}
-            >
+            <div className="modal-bottom">
               <div className="modal-button-container">
                 <Button
                   type="submit"
-                  color={courses[actualCourse].color}
                   text="Zatwierdź zmiany"
                   class="btn modal-button"
                 ></Button>

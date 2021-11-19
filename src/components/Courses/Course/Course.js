@@ -190,15 +190,24 @@ const Course = ({ course, id }) => {
                   );
                 })}
               </div>
-              <div className="modal-button-container">
+              {/* <div className="modal-button-container">
                 <Button
                   type="submit"
                   text="Zatwierdź zmiany"
                   color={course.color}
                   class="btn modal-button"
                 ></Button>
-              </div>
+              </div> */}
             </form>
+            <div className="modal-bottom">
+              <div className="modal-button-container">
+                <Button
+                  type="submit"
+                  text="Zatwierdź zmiany"
+                  class="btn modal-button"
+                ></Button>
+              </div>
+            </div>
           </div>
         </Modal>
         <h2 style={{ marginTop: "-15px" }} className="bungee">
