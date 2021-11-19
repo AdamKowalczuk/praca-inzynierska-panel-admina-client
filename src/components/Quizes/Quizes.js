@@ -34,7 +34,7 @@ const Quizes = () => {
     _id: GenerateObjectId(),
     actualChapter: actualChapter,
   };
-  const [form, setForm] = useState(initialState);
+  let [form, setForm] = useState(initialState);
   function GenerateObjectId() {
     var ObjectId = (
       m = Math,
@@ -59,16 +59,15 @@ const Quizes = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log(form);
     e.preventDefault();
     setForm({ ...form, _id: GenerateObjectId() });
     if (form.answer1 !== "") form.answers.push(form.answer1);
     if (form.answer2 !== "") form.answers.push(form.answer2);
     if (form.answer3 !== "") form.answers.push(form.answer3);
     if (form.answer4 !== "") form.answers.push(form.answer4);
-    // setForm({ ...form, answers: [] });
     dispatch(createQuiz(form, courseId, chapterId));
     handleClose();
+    setForm({ ...initialState });
   };
   return (
     <>

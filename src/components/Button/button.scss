@@ -64,7 +64,8 @@ $red: #ff4e40;
 .modal-button-container {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+
   .modal-button {
     padding: 10px;
     background-color: $green;

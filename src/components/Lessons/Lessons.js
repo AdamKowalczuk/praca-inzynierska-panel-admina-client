@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./lessons.scss";
 import { useSelector, useDispatch } from "react-redux";
 import Lesson from "./Lesson/Lesson.js";
 import Topbar from "../Topbar/Topbar";
@@ -9,7 +8,6 @@ import Plus from "../../images/plus.svg";
 import Button from "../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
 import OpenBook from "../../images/open-book.svg";
-// import Image from "./Lesson/Image";
 import { createLesson } from "../../actions/courses";
 
 function importAll(r) {
@@ -27,7 +25,7 @@ const Image = (props) => {
       {images.map((image, id) => {
         return (
           <>
-            <h3>{image.default}</h3>
+            <h3 style={{ width: "50%" }}>{image.default}</h3>
             <img
               className="lesson-image"
               src={image.default}
@@ -44,7 +42,6 @@ const Image = (props) => {
   );
 };
 
-// import images from "./Lesson/images";
 const Lessons = () => {
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.courses);
@@ -171,6 +168,19 @@ const Lessons = () => {
             <div className="images-container">
               <Image chooseImage={(e) => chooseImage(e)} />
             </div>
+            {/* <div className="modal-button-container">
+              <Button
+                type="submit"
+                color={courses[actualCourse].color}
+                text="Zatwierdź zmiany"
+                class="btn modal-button"
+              ></Button>
+            </div> */}
+          </form>
+          <div
+            className="modal-bottom"
+            style={{ backgroundColor: courses[actualCourse].color }}
+          >
             <div className="modal-button-container">
               <Button
                 type="submit"
@@ -179,7 +189,7 @@ const Lessons = () => {
                 class="btn modal-button"
               ></Button>
             </div>
-          </form>
+          </div>
         </div>
       </Modal>
       <div className="home-container">

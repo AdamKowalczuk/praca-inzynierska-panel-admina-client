@@ -5,8 +5,8 @@ $green: #22ca96;
 $red: #ff4e40;
 
 .modal {
-  width: 35%;
-  margin: 60px 32.5%;
+  width: 50%;
+  margin: 60px 25%;
   border-radius: 10px;
   // padding: 20px;
   background-color: $white;
@@ -17,11 +17,12 @@ $red: #ff4e40;
   form {
     margin-top: 40px;
     padding: 0 20px 20px 20px;
-    overflow: scroll;
+    overflow-y: scroll;
     max-height: 500px;
   }
   form::-webkit-scrollbar {
     // display: none;
+    // overflow-y: visible;
   }
   .modal-top {
     background-color: $green;
@@ -64,9 +65,13 @@ $red: #ff4e40;
       position: absolute;
       left: 50px;
       top: 12.5px;
-
-      // left: 40px;
     }
+  }
+  .modal-bottom {
+    background-color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10px;
   }
 
   input,
@@ -79,4 +84,8 @@ $red: #ff4e40;
   textarea {
     min-height: 100px;
   }
+}
+
+.modal-icon {
+  width: 25%;
 }

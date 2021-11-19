@@ -1,0 +1,19 @@
+$green: #22ca96;
+$red: #ff4e40;
+.exercise-option {
+  width: 100%;
+  margin: 5px 0;
+  div {
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .exercise-correct {
+    border: 2px solid $green;
+    b {
+      color: $green;
+    }
+  }
+}

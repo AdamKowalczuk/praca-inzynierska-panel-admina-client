@@ -201,7 +201,9 @@ const Course = ({ course, id }) => {
             </form>
           </div>
         </Modal>
-        <h2 className="futura ">{course.name}</h2>
+        <h2 style={{ marginTop: "-15px" }} className="bungee">
+          {course.name}
+        </h2>
         <img
           style={{ width: "40%", marginLeft: "30%" }}
           // src={course.icon}

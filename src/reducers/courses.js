@@ -13,6 +13,9 @@ import {
   CREATE_QUIZ,
   UPDATE_QUIZ,
   DELETE_QUIZ,
+  CREATE_EXERCISE,
+  UPDATE_EXERCISE,
+  DELETE_EXERCISE,
 } from "../constants/actionTypes.js";
 
 const courses = (courses = [], action) => {
@@ -21,7 +24,6 @@ const courses = (courses = [], action) => {
       return action.payload;
     case FETCH_COURSE:
       return { ...courses, course: action.payload.course };
-
     case CREATE_COURSE:
       return [...courses, action.payload];
     case UPDATE_COURSE:
@@ -48,6 +50,15 @@ const courses = (courses = [], action) => {
         if (course._id === action.courseId) {
           course.chapters[action.actualChapter].quiz[action.actualQuiz] =
             action.quiz;
+        }
+        return course;
+      });
+    case UPDATE_EXERCISE:
+      return courses.map((course) => {
+        if (course._id === action.courseId) {
+          course.chapters[action.actualChapter].exercises[
+            action.actualExercise
+          ] = action.exercise;
         }
         return course;
       });
@@ -80,6 +91,17 @@ const courses = (courses = [], action) => {
         }
         return course;
       });
+    case CREATE_EXERCISE:
+      return courses.map((course) => {
+        if (course._id === action.courseId) {
+          course.chapters.map((chapter) => {
+            if (chapter._id === action.chapterId) {
+              chapter.exercises.push(action.payload);
+            }
+          });
+        }
+        return course;
+      });
     case DELETE_COURSE:
       return courses.filter((course) => course._id !== action.payload);
     case DELETE_CHAPTER:
@@ -106,6 +128,17 @@ const courses = (courses = [], action) => {
           course.chapters.map((chapter) => {
             if (chapter._id === action.chapterId) {
               chapter.quiz.splice(action.actualQuiz, 1);
+            }
+          });
+        }
+        return course;
+      });
+    case DELETE_EXERCISE:
+      return courses.map((course) => {
+        if (course._id === action.courseId) {
+          course.chapters.map((chapter) => {
+            if (chapter._id === action.chapterId) {
+              chapter.exercises.splice(action.actualExercise, 1);
             }
           });
         }

@@ -18,8 +18,9 @@ $red: #ff4e40;
     background-color: $gray;
     border-radius: 10px;
     margin: 20px;
-
+    padding-top: 15px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
     color: $white;
     position: relative;
     .add-container {
@@ -73,6 +74,7 @@ $red: #ff4e40;
       justify-content: center;
       padding-bottom: 20px;
       margin: 0 15%;
+      font-size: 1.6rem;
       text-align: center;
       width: 70%;
       color: $white;
@@ -81,9 +83,10 @@ $red: #ff4e40;
       margin-top: 20px;
       color: $white;
       height: 250px;
-      padding: 0px 40px;
+      padding: 0px 5px;
       overflow: scroll;
       margin-bottom: 30px;
+      text-align: center;
     }
     .course-h3::-webkit-scrollbar {
       display: none;

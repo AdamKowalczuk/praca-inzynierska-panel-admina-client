@@ -9,8 +9,6 @@ import Button from "../Button/Button";
 import Modal from "@material-ui/core/Modal";
 import CloseIcon from "@material-ui/icons/Close";
 import { createChapter } from "../../actions/courses";
-// import Icon from "./Chapter/Icon";
-
 function importAll(r) {
   let images = [];
   r.keys().map((item, index) => {
@@ -29,7 +27,7 @@ const Icon = (props) => {
             src={image.default}
             alt={image.default}
             key={id}
-            style={{ width: "50%" }}
+            className="modal-icon"
             onClick={props.chooseIcon}
             id="icon"
             name="icon"
@@ -64,6 +62,7 @@ const Chapters = () => {
     lessons: [],
     icon: "",
     quiz: [],
+    exercises: [],
     isQuizCompleted: false,
     isExerciseCompleted: false,
     _id: GenerateObjectId(),
@@ -109,9 +108,13 @@ const Chapters = () => {
   const chooseIcon = (e) => {
     let icon = e.target.src;
     let newIcon = "";
-    for (var i = 21; i < icon.length; i++) {
+    for (var i = 35; i < icon.length; i++) {
+      if (icon.charAt(i) === ".") {
+        break;
+      }
       newIcon += icon.charAt(i);
     }
+    newIcon += ".svg";
     setForm({ ...form, [e.target.name]: newIcon });
   };
   const handleSubmit = (e) => {
@@ -148,11 +151,6 @@ const Chapters = () => {
               <h3>Nazwa rozdziału</h3>
             </label>
             <input type="text" onChange={handleChange} name="name" />
-
-            {/* <label htmlFor="description">
-              <h3>Opis rozdziału</h3>
-            </label>
-            <textarea type="text" onChange={handleChange} name="description" /> */}
             <h3 style={{ marginBottom: "10px" }}>Wybierz zdjęcie:</h3>
             <div className="icons-container">
               <Icon chooseIcon={(e) => chooseIcon(e)} />

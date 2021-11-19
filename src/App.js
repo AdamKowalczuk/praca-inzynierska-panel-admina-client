@@ -11,10 +11,10 @@ import Auth from "./components/Auth/Auth";
 import Chapters from "./components/Chapters/Chapters";
 import Lessons from "./components/Lessons/Lessons";
 import Quiz from "./components/Quizes/Quizes";
+import Exercises from "./components/Exercises/Exercises";
 
 const App = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getCourses());
     dispatch(getUsers());
@@ -29,6 +29,7 @@ const App = () => {
         <Route path="/admin/rozdziały" exact component={Chapters} />
         <Route path="/admin/lekcje" exact component={Lessons} />
         <Route path="/admin/quizy" exact component={Quiz} />
+        <Route path="/admin/zadania" exact component={Exercises} />
       </Switch>
     </BrowserRouter>
   );

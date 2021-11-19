@@ -37,7 +37,7 @@ const Topbar = (props) => {
     <>
       {user?.result ? (
         <div className="topbar">
-          <h1 className="circular">{props.name}</h1>
+          <h2 className="bungee">{props.name}</h2>
           {/* <img src={Logout} alt="logout" onClick={logout} /> */}
           {/* <Logout onClick={logout} /> */}
           <MeetingRoomIcon onClick={logout} />

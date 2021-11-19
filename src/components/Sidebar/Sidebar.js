@@ -13,7 +13,7 @@ const Sidebar = () => {
       <div className="sidebar">
         <h3 className="logo">
           <img src={Web} alt="web" />
-          <p className="futura">WebFront</p>
+          <p className="bungee">WebFront</p>
         </h3>
         <div className="subject">
           <Link className="link" to="/admin/">

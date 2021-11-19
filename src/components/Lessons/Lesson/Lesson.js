@@ -238,6 +238,11 @@ const Lesson = ({ lesson, id }) => {
               <div className="images-container">
                 <Image chooseImage={(e) => chooseImage(e)} />
               </div>
+            </form>
+            <div
+              className="modal-bottom"
+              style={{ backgroundColor: courses[actualCourse].color }}
+            >
               <div className="modal-button-container">
                 <Button
                   type="submit"
@@ -246,15 +251,14 @@ const Lesson = ({ lesson, id }) => {
                   class="btn modal-button"
                 ></Button>
               </div>
-            </form>
+            </div>
           </div>
         </Modal>
         <h2 className="futura" style={{ color: courses[actualCourse].color }}>
           {lesson.name}
         </h2>
         <img
-          style={{ width: "70%", marginLeft: "15%" }}
-          // src={images[lesson.image].default}
+          style={{ width: "90%", marginLeft: "5%", marginTop: "15px" }}
           src={images2[lesson.image].default}
           alt={lesson.name}
         />

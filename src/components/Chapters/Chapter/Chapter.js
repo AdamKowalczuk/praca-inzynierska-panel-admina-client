@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-// import "./chapter.scss";
+import "./chapter.scss";
 import { Link } from "react-router-dom";
 import Modal from "@material-ui/core/Modal";
 import Button from "../../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
 import Pen from "../../../images/pen.svg";
 import Lesson from "../../../images/board.svg";
+import Exercise from "../../../images/exercise.svg";
 import {
   changeActualChapter,
   updateChapter,
@@ -17,9 +18,6 @@ import Delete from "../../../images/delete.svg";
 import { useDispatch, useSelector } from "react-redux";
 import Quiz from "../../../images/quiz.svg";
 import { jssPreset } from "@material-ui/styles";
-
-// import icons2 from "./icons/stare";
-
 function importAll(r) {
   let images = [];
   r.keys().map((item, index) => {
@@ -47,7 +45,7 @@ const Icon = (props) => {
             src={image.default}
             alt={image.default}
             key={id}
-            style={{ width: "50%" }}
+            className="modal-icon"
             onClick={props.chooseIcon}
             id="icon"
             name="icon"
@@ -82,6 +80,7 @@ const Chapter = ({ chapter, id }) => {
     icon: chapter.icon,
     _id: GenerateObjectId(),
     quiz: chapter.quiz,
+    exercises: chapter.exercises,
     isQuizCompleted: chapter.isQuizCompleted,
     isExerciseCompleted: chapter.isExerciseCompleted,
     actualChapter: id,
@@ -94,7 +93,6 @@ const Chapter = ({ chapter, id }) => {
   };
   const chooseIcon = (e) => {
     let icon = e.target.src;
-    console.log(icon);
     let newIcon = "";
     for (var i = 35; i < icon.length; i++) {
       if (icon.charAt(i) === ".") {
@@ -104,7 +102,6 @@ const Chapter = ({ chapter, id }) => {
     }
     newIcon += ".svg";
     setForm({ ...form, [e.target.name]: newIcon });
-    console.log(newIcon);
   };
   switch (actualCourse) {
     case 0:
@@ -205,16 +202,6 @@ const Chapter = ({ chapter, id }) => {
                 onChange={handleChange}
                 name="name"
               />
-
-              {/* <label htmlFor="description">
-                <h3>Opis rozdziału</h3>
-              </label>
-              <textarea
-                type="text"
-                value={form.description}
-                onChange={handleChange}
-                name="description"
-              /> */}
               <h3 style={{ marginBottom: "10px" }}>Wybierz zdjęcie:</h3>
               <div className="images-container">
                 <Icon chooseIcon={(e) => chooseIcon(e)} />
@@ -238,7 +225,6 @@ const Chapter = ({ chapter, id }) => {
           src={images2[chapter.icon].default}
           alt={chapter.icon}
         />
-        {/* <h3 className="course-h3">{chapter.description}</h3> */}
         <div
           className="chapters-lessons-container"
           style={{ marginTop: "50px" }}
@@ -250,6 +236,7 @@ const Chapter = ({ chapter, id }) => {
                 backgroundColor: courses[actualCourse].color,
               }}
               onClick={() => dispatch(changeActualChapter(id))}
+              className="chapter-link"
             >
               <img src={Lesson} alt="lesson" />
               <p className="italic ">Lekcje</p>
@@ -262,9 +249,23 @@ const Chapter = ({ chapter, id }) => {
                 backgroundColor: courses[actualCourse].color,
               }}
               onClick={() => dispatch(changeActualChapter(id))}
+              className="chapter-link"
             >
               <img src={Quiz} alt="lesson" />
               <p className="italic ">Quizy</p>
+            </h4>
+          </Link>
+          <Link className="link" to="/admin/zadania">
+            <h4
+              style={{
+                cursor: "pointer",
+                backgroundColor: courses[actualCourse].color,
+              }}
+              onClick={() => dispatch(changeActualChapter(id))}
+              className="chapter-link"
+            >
+              <img src={Exercise} alt="exercise" />
+              <p className="italic ">Zadania</p>
             </h4>
           </Link>
         </div>
