@@ -7,7 +7,8 @@ import {
 import * as api from "../api/index.js";
 
 export const createExercise =
-  (exercise, courseId, chapterId, actualChapter) => async (dispatch) => {
+  (exercise, courseId, chapterId, actualCourse, actualChapter) =>
+  async (dispatch) => {
     console.log(courseId, chapterId);
     try {
       const { data } = await api.createExercise(exercise, courseId, chapterId);

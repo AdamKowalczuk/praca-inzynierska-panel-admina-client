@@ -2,7 +2,6 @@ import {
   FETCH_ALL_COURSES,
   FETCH_COURSE,
   CREATE_COURSE,
-  // UPDATE_COURSE,
   DELETE_COURSE,
   DELETE_CHAPTER,
   DELETE_LESSON,
@@ -38,7 +37,6 @@ export const getCourse = (id) => async (dispatch) => {
 export const createCourse = (course) => async (dispatch) => {
   try {
     const { data } = await api.createCourse(course);
-    console.log(course);
     dispatch({ type: CREATE_COURSE, payload: data });
   } catch (error) {
     console.log(error.message);
@@ -58,7 +56,6 @@ export const updateChapter =
   (chapter, courseId, chapterId) => async (dispatch) => {
     try {
       const { data } = await api.updateChapter(chapter, courseId, chapterId);
-      console.log(chapter, courseId, chapterId, chapter.actualChapter);
       dispatch({
         type: UPDATE_CHAPTER,
         chapter: chapter,

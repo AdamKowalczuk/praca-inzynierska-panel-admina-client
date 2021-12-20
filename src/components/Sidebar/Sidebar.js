@@ -4,7 +4,6 @@ import Home from "../../images/home.svg";
 import OpenBook from "../../images/open-book.svg";
 import Group from "../../images/group.svg";
 import Web from "../../images/web.svg";
-// import Quiz from "../../images/quiz.svg";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
@@ -31,14 +30,6 @@ const Sidebar = () => {
             </h4>
           </Link>
         </div>
-        {/* <div className="subject">
-          <Link className="link" to="/admin/quizy">
-            <h4 className="nav-item">
-              <img src={Quiz} alt="quiz" />
-              <p className="center">Quizy</p>
-            </h4>
-          </Link>
-        </div> */}
         <div className="subject">
           <Link className="link" to="/admin/użytkownicy">
             <h4 className="nav-item">

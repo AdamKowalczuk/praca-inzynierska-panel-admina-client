@@ -127,7 +127,6 @@ const Lessons = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log(form);
     setForm({ ...form, _id: GenerateObjectId() });
     e.preventDefault();
     dispatch(createLesson(form, courseId, chapterId));
@@ -168,24 +167,15 @@ const Lessons = () => {
             <div className="images-container">
               <Image chooseImage={(e) => chooseImage(e)} />
             </div>
-            {/* <div className="modal-button-container">
+            <div className="modal-button-container">
               <Button
                 type="submit"
                 color={courses[actualCourse].color}
                 text="Zatwierdź zmiany"
                 class="btn modal-button"
               ></Button>
-            </div> */}
-          </form>
-          <div className="modal-bottom">
-            <div className="modal-button-container">
-              <Button
-                type="submit"
-                text="Zatwierdź zmiany"
-                class="btn modal-button"
-              ></Button>
             </div>
-          </div>
+          </form>
         </div>
       </Modal>
       <div className="home-container">

@@ -35,7 +35,6 @@ const Course = ({ course, id }) => {
   function importAll(r) {
     let images = {};
     r.keys().map((item, index) => {
-      // images.push(r(item));
       images[item.replace("./", "")] = r(item);
     });
     return images;
@@ -190,24 +189,15 @@ const Course = ({ course, id }) => {
                   );
                 })}
               </div>
-              {/* <div className="modal-button-container">
+              <div className="modal-button-container">
                 <Button
                   type="submit"
                   text="Zatwierdź zmiany"
                   color={course.color}
                   class="btn modal-button"
                 ></Button>
-              </div> */}
-            </form>
-            <div className="modal-bottom">
-              <div className="modal-button-container">
-                <Button
-                  type="submit"
-                  text="Zatwierdź zmiany"
-                  class="btn modal-button"
-                ></Button>
               </div>
-            </div>
+            </form>
           </div>
         </Modal>
         <h2 style={{ marginTop: "-15px" }} className="bungee">
@@ -215,7 +205,6 @@ const Course = ({ course, id }) => {
         </h2>
         <img
           style={{ width: "40%", marginLeft: "30%" }}
-          // src={course.icon}
           src={images[course.icon].default}
           alt={course.icon}
         />
@@ -225,7 +214,6 @@ const Course = ({ course, id }) => {
             <h4
               style={{
                 cursor: "pointer",
-                // backgroundColor: course.primaryColor,
               }}
               onClick={() => dispatch(changeActualCourse(id))}
             >
@@ -234,11 +222,7 @@ const Course = ({ course, id }) => {
               <p className="italic">rozdziały</p>
             </h4>
           </Link>
-          <h4
-          // style={{
-          //   backgroundColor: course.primaryColor,
-          // }}
-          >
+          <h4>
             <img src={Lesson} alt="lesson" />
             <p>{sumLessons()}</p>
             <p className="italic ">lekcje</p>

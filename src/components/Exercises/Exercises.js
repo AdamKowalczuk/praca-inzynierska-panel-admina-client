@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Topbar from "../Topbar/Topbar";
 import Sidebar from "../Sidebar/Sidebar";
-// import "./exercises.scss";
 import Pen from "../../images/pen.svg";
 import Plus from "../../images/plus.svg";
 import Delete from "../../images/delete.svg";
@@ -178,7 +177,6 @@ const Exercises = () => {
     delete form.correctNumber9;
     delete form.correctNumber10;
     dispatch(createExercise(form, courseId, chapterId));
-    console.log(form);
     handleClose();
     setForm({ ...initialState });
   };

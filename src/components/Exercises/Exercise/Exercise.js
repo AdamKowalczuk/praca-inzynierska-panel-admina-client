@@ -26,6 +26,7 @@ const Exercise = ({ exercise, id }) => {
     options: exercise.options,
     isFinished: exercise.isFinished,
     _id: exercise._id,
+    actualCourse: actualCourse,
     actualChapter: actualChapter,
     actualExercise: id,
   };
@@ -362,7 +363,6 @@ const Exercise = ({ exercise, id }) => {
                   </div>
                 )}
               </h4>
-              {/* <h5>{option.correctNumber}</h5> */}
             </>
           );
         })}

@@ -206,24 +206,15 @@ const Chapter = ({ chapter, id }) => {
               <div className="images-container">
                 <Icon chooseIcon={(e) => chooseIcon(e)} />
               </div>
-              {/* <div className="modal-button-container">
+              <div className="modal-button-container">
                 <Button
                   type="submit"
                   color={courses[actualCourse].color}
                   text="Zatwierdź zmiany"
                   class="btn modal-button"
                 ></Button>
-              </div> */}
-            </form>
-            <div className="modal-bottom">
-              <div className="modal-button-container">
-                <Button
-                  type="submit"
-                  text="Zatwierdź zmiany"
-                  class="btn modal-button"
-                ></Button>
               </div>
-            </div>
+            </form>
           </div>
         </Modal>
         <h2 className="futura" style={{ color: courses[actualCourse].color }}>

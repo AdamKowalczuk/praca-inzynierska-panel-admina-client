@@ -1,17 +1,9 @@
 import React, { useState } from "react";
-import "./lesson.scss";
-// import { Link } from "react-router-dom";
-// import AssignmentIcon from "@material-ui/icons/Assignment";
-// import AssessmentIcon from "@material-ui/icons/Assessment";
-// import EditIcon from "@material-ui/icons/Edit";
 import Modal from "@material-ui/core/Modal";
 import Button from "../../Button/Button";
 import CloseIcon from "@material-ui/icons/Close";
 import Pen from "../../../images/pen.svg";
 import OpenBook from "../../../images/open-book.svg";
-// import images from "./images";
-// import images from "./images";
-// import Image from "./Image";
 
 import "../../../modal.scss";
 import {
@@ -165,7 +157,6 @@ const Lesson = ({ lesson, id }) => {
     if (form.image === "") {
       form.image = lesson.image;
     }
-    console.log(form);
     e.preventDefault();
     dispatch(updateLesson(form, courseId, chapterId, form._id));
     handleClose();
@@ -238,8 +229,6 @@ const Lesson = ({ lesson, id }) => {
               <div className="images-container">
                 <Image chooseImage={(e) => chooseImage(e)} />
               </div>
-            </form>
-            <div className="modal-bottom">
               <div className="modal-button-container">
                 <Button
                   type="submit"
@@ -247,7 +236,7 @@ const Lesson = ({ lesson, id }) => {
                   class="btn modal-button"
                 ></Button>
               </div>
-            </div>
+            </form>
           </div>
         </Modal>
         <h2 className="futura" style={{ color: courses[actualCourse].color }}>

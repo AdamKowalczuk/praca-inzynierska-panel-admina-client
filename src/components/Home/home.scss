@@ -62,7 +62,6 @@ $yellow: #fee786;
 
   .users-number-left {
     display: inline-block;
-    // align-items: flex-start;
     padding-left: 30px;
     padding-bottom: 30px;
   }
@@ -100,14 +99,11 @@ $yellow: #fee786;
       align-items: center;
       margin-top: -10px;
       margin-right: -100px;
-      .acomplished-name {
-      }
       .acomplished-number {
         display: inline-block;
         padding: 20px;
         border-radius: 10px;
         margin-top: 10px;
-        // background-color: red;
       }
       .acomplished-number-1 {
         color: $red;

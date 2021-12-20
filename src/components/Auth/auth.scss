@@ -1,6 +1,3 @@
-// $dark: #0c0c0d;
-// $white: #f1f1f2;
-
 $dark: #2f3749;
 $gray: #363f50;
 $white: #ffffff;
@@ -9,13 +6,11 @@ $red: #ff4e40;
 
 @media only screen and (min-width: 800px) {
   .auth-container {
-    // margin: 10% 0;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     .form-container {
-      // height: 100vh;
       color: $white;
 
       img {
